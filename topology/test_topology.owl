@@ -252,6 +252,7 @@
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D2"/>
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D5"/>
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D7"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -264,6 +265,7 @@
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D4"/>
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D5"/>
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D6"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -323,6 +325,7 @@
     <owl:NamedIndividual rdf:about="http://bnc/exp-rob-lab/2022-23#E">
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D5"/>
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D6"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -332,6 +335,7 @@
 
     <owl:NamedIndividual rdf:about="http://bnc/exp-rob-lab/2022-23#R1">
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D1"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -341,6 +345,7 @@
 
     <owl:NamedIndividual rdf:about="http://bnc/exp-rob-lab/2022-23#R2">
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D2"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -350,6 +355,7 @@
 
     <owl:NamedIndividual rdf:about="http://bnc/exp-rob-lab/2022-23#R3">
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D3"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
@@ -359,6 +365,7 @@
 
     <owl:NamedIndividual rdf:about="http://bnc/exp-rob-lab/2022-23#R4">
         <hasDoor rdf:resource="http://bnc/exp-rob-lab/2022-23#D4"/>
+        <visitedAt rdf:datatype="http://www.w3.org/2001/XMLSchema#long">123</visitedAt>
     </owl:NamedIndividual>
     
 
