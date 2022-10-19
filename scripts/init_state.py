@@ -52,4 +52,4 @@ client.manipulation.add_dataprop_to_ind('visitedAt', 'E', 'Long', '123')
 client.utils.apply_buffered_changes()
 client.utils.sync_buffered_reasoner()
 
-client.utils.save(path + "testtop.owl")
+client.utils.save_ref_with_inferences(path + "test_ontology_2.owl")
