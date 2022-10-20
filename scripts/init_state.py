@@ -38,7 +38,7 @@ class InitState(smach.State):
 		path = dirname(realpath(__file__))
 		path = path + "/../topology/"
 
-		client = ArmorClient("armor_client", "reference")
+		client = self._helper.client
 		client.utils.load_ref_from_file(path + "topological_map.owl", "http://bnc/exp-rob-lab/2022-23",
 										True, "PELLET", True, False)
 		client.utils.mount_on_ref()
