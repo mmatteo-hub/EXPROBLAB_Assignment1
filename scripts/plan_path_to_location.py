@@ -14,7 +14,6 @@ from EXPROBLAB_Assignment1 import name_mapper as nm
 class PlanPathToLocation(smach.State):
 	def __init__(self, helper):
 		self._helper = helper
-		self.client = self._helper.client.query
 		# initialisation function, it should not wait
 		smach.State.__init__(self, 
 								outcomes=[nm.BATTERY_OK, nm.BATTERY_LOW, nm.LOADED_ONTOLOGY, nm.REASONED, nm.PLANNED_PATH, nm.LOCATION_REACHED],
@@ -45,5 +44,5 @@ class PlanPathToLocation(smach.State):
 		self._helper.planner_client.send_goal(goal)
 	
 	def _start_position(self):
-		pos = self.client.objectprop_b2_ind('isIn','robot')
+		pos = self._helper.client.query.objectprop_b2_ind('isIn','robot')
 		return Point(x = 1, y = 1)

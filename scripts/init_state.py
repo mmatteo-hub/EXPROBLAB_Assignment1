@@ -29,6 +29,7 @@ class InitState(smach.State):
 			self._helper.mutex.acquire()
 			try:
 				self._ontology_initialization()
+				self._helper.action_for_change = nm.LOADED_ONTOLOGY
 				return nm.LOADED_ONTOLOGY
 			finally:
 				self._helper.mutex.release()
@@ -38,45 +39,44 @@ class InitState(smach.State):
 		path = dirname(realpath(__file__))
 		path = path + "/../topology/"
 
-		client = self._helper.client
-		client.utils.load_ref_from_file(path + "topological_map.owl", "http://bnc/exp-rob-lab/2022-23",
+		self._helper.client.utils.load_ref_from_file(path + "topological_map.owl", "http://bnc/exp-rob-lab/2022-23",
 										True, "PELLET", True, False)
-		client.utils.mount_on_ref()
-		client.utils.set_log_to_terminal(True)
+		self._helper.client.utils.mount_on_ref()
+		self._helper.client.utils.set_log_to_terminal(True)
 
-		client.manipulation.add_ind_to_class('robot', "Robot")
+		self._helper.client.manipulation.add_ind_to_class('robot', "Robot")
 
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'E', "D5")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'E', "D6")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'E', "D5")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'E', "D6")
 
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D1")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D2")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D5")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D7")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D1")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D2")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D5")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C1', "D7")
 
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D3")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D4")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D5")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D6")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D3")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D4")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D5")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'C2', "D6")
 
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'R1', "D1")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'R2', "D2")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'R3', "D3")
-		client.manipulation.add_objectprop_to_ind("hasDoor", 'R4', "D4")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'R1', "D1")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'R2', "D2")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'R3', "D3")
+		self._helper.client.manipulation.add_objectprop_to_ind("hasDoor", 'R4', "D4")
 
-		client.manipulation.add_objectprop_to_ind("isIn", 'robot', "E")
+		self._helper.client.manipulation.add_objectprop_to_ind("isIn", 'robot', "E")
 
-		client.call('DISJOINT', 'IND', '', ['E','C1','C2','R1','R2','R3','R4','D1','D2','D3','D4','D5','D6','D7'])
+		self._helper.client.call('DISJOINT', 'IND', '', ['E','C1','C2','R1','R2','R3','R4','D1','D2','D3','D4','D5','D6','D7'])
 
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'R1', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'R2', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'R3', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'R4', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'C1', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'C2', 'Long', '123')
-		client.manipulation.add_dataprop_to_ind('visitedAt', 'E', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R1', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R2', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R3', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R4', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'C1', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'C2', 'Long', '123')
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'E', 'Long', '123')
 
-		client.utils.apply_buffered_changes()
-		client.utils.sync_buffered_reasoner()
+		self._helper.client.utils.apply_buffered_changes()
+		self._helper.client.utils.sync_buffered_reasoner()
 
-		client.utils.save_ref_with_inferences(path + "test_ontology_3.owl")
+		self._helper.client.utils.save_ref_with_inferences(path + "test_ontology_3.owl")

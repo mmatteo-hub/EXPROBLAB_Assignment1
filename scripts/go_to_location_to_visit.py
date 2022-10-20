@@ -29,7 +29,11 @@ class GoToLocationToVisit(smach.State):
 				if self._helper.action_for_change == nm.BATTERY_LOW:
 					self._helper.controller_client.cancel_goal()
 					return nm.BATTERY_LOW
-				if self._helper.controller_client.get_state() == GoalStatus.SUCCEEDED:
+				if self._helper.planner_client.get_state() == GoalStatus.SUCCEEDED:
+					self._helper.client.manipulation.replace_objectprop_b2_ind('isIn', 'robot', 'C1', 'E')
+					pos = self._helper.client.query.objectprop_b2_ind('isIn','robot')
+					print("Robot is in " + str(pos))
+					self._helper.action_for_change = nm.LOCATION_REACHED
 					return nm.LOCATION_REACHED
 			finally:
 				self._helper.mutex.release()
