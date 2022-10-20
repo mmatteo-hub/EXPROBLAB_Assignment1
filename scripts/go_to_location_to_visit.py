@@ -6,6 +6,7 @@ import rospy
 import actionlib
 import smach
 import smach_ros
+from actionlib_msgs.msg import GoalStatus
 from EXPROBLAB_Assignment1 import name_mapper as nm
 
 class GoToLocationToVisit(smach.State):
@@ -25,7 +26,11 @@ class GoToLocationToVisit(smach.State):
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
 			try:
-				print("go_to")
+				if self._helper.action_for_change == nm.BATTERY_LOW:
+					self._helper.controller_client.cancel_goal()
+					return nm.BATTERY_LOW
+				if self._helper.controller_client.get_state() == GoalStatus.SUCCEEDED:
+					return nm.LOCATION_REACHED
 			finally:
 				self._helper.mutex.release()
 			rospy.sleep(0.3)
