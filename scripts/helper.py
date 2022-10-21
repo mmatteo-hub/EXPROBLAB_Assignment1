@@ -20,8 +20,18 @@ class Helper:
 		else:
 			self.mutex = mutex
 		self.action_for_change = ''
+		
 		# client for the arMOR server
-		self.client = ArmorClient("armor_client", "reference")
+		self.client = ArmorClient('armor_client', "reference")
+			
+		# client for the planner server
 		self.planner_client = actionlib.SimpleActionClient('motion/planner', PlanAction)
-		self.controller_client = actionlib.SimpleActionClient('motion/controller', ControlAction)
+		
+		# client for the controller server
+		#self.controller_client = actionlib.SimpleActionClient('motion/controller', ControlAction)
 	
+	def _string_adjust(self, location):
+		for el in range(len(location)):
+			index = location[el].index('#')
+			location[el] = location[el][index+1:-1]
+		return location

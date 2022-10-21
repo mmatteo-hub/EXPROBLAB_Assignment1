@@ -44,5 +44,6 @@ class PlanPathToLocation(smach.State):
 		self._helper.planner_client.send_goal(goal)
 	
 	def _start_position(self):
-		pos = self._helper.client.query.objectprop_b2_ind('isIn','robot')
+		pos = self._helper.client.query.objectprop_b2_ind('isIn','Robot1')
+		#print("NOW ROBOT IS IN " + str(pos))
 		return Point(x = 1, y = 1)

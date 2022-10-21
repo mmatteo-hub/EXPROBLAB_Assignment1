@@ -30,9 +30,9 @@ class GoToLocationToVisit(smach.State):
 					self._helper.controller_client.cancel_goal()
 					return nm.BATTERY_LOW
 				if self._helper.planner_client.get_state() == GoalStatus.SUCCEEDED:
-					self._helper.client.manipulation.replace_objectprop_b2_ind('isIn', 'robot', 'C1', 'E')
-					pos = self._helper.client.query.objectprop_b2_ind('isIn','robot')
-					print("Robot is in " + str(pos))
+					self._helper.client.manipulation.replace_objectprop_b2_ind('isIn', 'Robot1', str(self._helper.choice), str(self._helper.old_loc))
+					log_msg = f'Moving the robot to {str(self._helper.choice)} '
+					rospy.loginfo(nm.tag_log(log_msg, nm.GO_TO_LOCATION_TO_VISIT))
 					self._helper.action_for_change = nm.LOCATION_REACHED
 					return nm.LOCATION_REACHED
 			finally:
