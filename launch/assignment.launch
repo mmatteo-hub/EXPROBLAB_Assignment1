@@ -6,6 +6,9 @@
 	<!-- Node for the planner server -->
 	<node pkg="EXPROBLAB_Assignment1" type="planner.py" name="planner" output="screen" launch-prefix="xterm -e"/>
 	
+	<!-- Node for the controller server -->
+	<node pkg="EXPROBLAB_Assignment1" type="controller.py" name="controller" output="screen" launch-prefix="xterm -e"/>
+	
 	<!-- Node for the FSM node -->
 	<node pkg="EXPROBLAB_Assignment1" type="fsm.py" name="fsm" output="screen" launch-prefix="xterm -e"/>
 	
