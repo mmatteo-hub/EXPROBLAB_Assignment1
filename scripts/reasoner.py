@@ -23,31 +23,54 @@ class Reasoner(smach.State):
 		# function called when exiting from the node, it can be blacking
 		rospy.loginfo('Executing state ' + nm.REASONER + ' (users = %f)'%userdata.reasoner_counter_in)
 		userdata.reasoner_counter_out = userdata.reasoner_counter_in + 1
-		
+		self._helper.reason_changes()
+		self._helper.check_battery()
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
 			try:
 				if self._helper.action_for_change == nm.BATTERY_LOW:
 					self._helper.planner_client.cancel_goal()
 					return nm.BATTERY_LOW
-				if self._helper.action_for_change == nm.LOADED_ONTOLOGY or self._helper.action_for_change == nm.LOCATION_REACHED:
-					self._reason_changes()
+				if self._helper.action_for_change == nm.LOADED_ONTOLOGY or self._helper.action_for_change == nm.LOCATION_REACHED or self._helper.action_for_change == nm.BATTERY_OK:
 					self._helper.choice = self._check_accessible_location()
-					self._helper.old_loc = self._helper._string_adjust(self._helper.client.query.objectprop_b2_ind('isIn','Robot1'))
-					self._helper.old_loc = self._helper.old_loc[0]
+					self._helper.old_loc = self._helper.format(self._helper.client.query.objectprop_b2_ind('isIn','Robot1'), '#', '>')[0]
 					return nm.REASONED
 			finally:
 				self._helper.mutex.release()
 			rospy.sleep(0.3)
-	
-	def _reason_changes(self):
-		self._helper.client.utils.apply_buffered_changes()
-		self._helper.client.utils.sync_buffered_reasoner()
 
 	def _check_accessible_location(self):
-		reachable_locations = self._helper.client.query.objectprop_b2_ind('canReach','Robot1')
-		reachable_locations = self._helper._string_adjust(reachable_locations)
-		return self._choose_destination(reachable_locations)
+		_reachable_locations = self._helper.format(self._helper.client.query.objectprop_b2_ind('canReach','Robot1'), '#', '>')
+		_reachable_corridors = self._check_for_corridors(_reachable_locations)
+		_reachable_urgent = self._check_for_urgent_locations(_reachable_locations)
 		
+		if _reachable_urgent != []:
+			return self._choose_destination(_reachable_urgent)
+		elif _reachable_corridors != []:
+			return self._choose_destination(_reachable_corridors)
+		elif _reachable_locations != []:
+			return self._choose_destination(_reachable_locations)
+		else:
+			log_msg = f'No locations reachable from {str(self._helper.choice)} '
+			rospy.loginfo(nm.tag_log(log_msg, nm.REASONER))
+			
+	def _check_for_corridors(self, _reachable_locations):
+		_corridors = self._helper.format(self._helper.client.query.ind_b2_class('CORRIDOR'), '#', '>')
+		_reachable_corridors = []
+		for i in range(len(_corridors)):
+			if(_corridors[i] in _reachable_locations):
+				_reachable_corridors.append(_corridors[i])
+				
+		return _reachable_corridors
+		
+	def _check_for_urgent_locations(self, _reachable_locations):
+		_urgent_locations = self._helper.format(self._helper.client.query.ind_b2_class('URGENT'), '#', '>')
+		_reachable_urgent = []
+		for i in range(len(_urgent_locations)):
+			if(_urgent_locations[i] in _reachable_locations):
+				_reachable_urgent.append(_urgent_locations[i])
+				
+		return _reachable_urgent
+			
 	def _choose_destination(self, locations):
 		return random.choice(locations)

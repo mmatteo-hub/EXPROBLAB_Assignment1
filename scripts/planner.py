@@ -2,6 +2,7 @@
 
 import random
 import rospy
+import numpy as np
 # Import constant name defined to structure the architecture.
 from EXPROBLAB_Assignment1 import name_mapper as nm
 # Import the ActionServer implementation used.
@@ -59,18 +60,17 @@ class PlaningAction(object):
         feedback.via_points.append(start_point)
         # Publish the feedback and wait to simulate computation.
         self._as.publish_feedback(feedback)
-        #delay = random.uniform(self._random_plan_time[0], self._random_plan_time[1])
-        delay = random.uniform(0.1, 0.9)
-        rospy.sleep(delay)
 
         # Get a random number of via points to be included in the plan.
         #number_of_points = random.randint(self._random_plan_points[0], self._random_plan_points[1] + 1)
-        number_of_points = random.randint(1, 8)
-        log_msg = f'Server is planning {number_of_points + 1} points...'
+        log_msg = f'Server is planning {nm.NUMBER_OF_POINTS_PATH} points...'
         rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
+        
+        x = np.linspace(start_point.x, target_point.x, nm.NUMBER_OF_POINTS_PATH)
+        y = np.linspace(start_point.y, target_point.y, nm.NUMBER_OF_POINTS_PATH)
 
         # Generate the points of the plan.
-        for i in range(1, number_of_points):
+        for i in range(1, nm.NUMBER_OF_POINTS_PATH):
             # Check that the client did not cancel this service.
             if self._as.is_preempt_requested():
                 rospy.loginfo(nm.tag_log('Server has been cancelled by the client!', LOG_TAG))
@@ -79,29 +79,25 @@ class PlaningAction(object):
                 return
             # Generate a new random point of the plan.
             new_point = Point()
-            #new_point.x = random.uniform(0, self._environment_size[0])
-            #new_point.y = random.uniform(0, self._environment_size[1])
-            new_point.x = random.uniform(0, 10)
-            new_point.y = random.uniform(0, 10)
+            new_point.x = x[i]
+            new_point.y = y[i]
             feedback.via_points.append(new_point)
-            if i < number_of_points - 1:
-                # Publish the new random point as feedback to the client.
-                self._as.publish_feedback(feedback)
-                # Wait to simulate computation.
-                #delay = random.uniform(self._random_plan_time[0], self._random_plan_time[1])
-                delay = random.uniform(0.2, 0.3)
-                rospy.sleep(delay)
-            else:
-                # Append the target point to the plan as the last point.
-                feedback.via_points.append(target_point)
+
+            # Wait to simulate computation.
+            delay = 0.25
+            rospy.sleep(delay)
+            
+            # Publish the new random point as feedback to the client.
+            self._as.publish_feedback(feedback)
 
         # Publish the results to the client.        
         result = PlanResult()
         result.via_points = feedback.via_points
-        self._as.set_succeeded(result)
         log_msg = 'Motion plan succeeded with plan: '
         log_msg += ''.join('(' + str(point.x) + ', ' + str(point.y) + '), ' for point in result.via_points)
         rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
+        self._as.set_succeeded(result)
+        return  # Succeeded.
 
     # Check if the point is within the environment bounds, i.e.
     # x: [0, `self._environment_size[0]`], and y: [0, `self._environment_size[1]`].

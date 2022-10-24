@@ -6,6 +6,7 @@ import rospy
 import actionlib
 import smach
 import smach_ros
+import time
 from os.path import dirname, realpath
 from EXPROBLAB_Assignment1 import name_mapper as nm
 
@@ -24,7 +25,7 @@ class InitState(smach.State):
 		# function called when exiting from the node, it can be blacking
 		rospy.loginfo('Executing state ' + nm.INIT_STATE + ' (users = %f)'%userdata.init_state_counter_in)
 		userdata.init_state_counter_out = userdata.init_state_counter_in + 1
-		
+		self._helper.battery_timestamp = int(time.time())
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
 			try:
@@ -65,16 +66,26 @@ class InitState(smach.State):
 		self._helper.client.manipulation.add_objectprop_to_ind('isIn', 'Robot1', 'E')
 
 		self._helper.client.call('DISJOINT', 'IND', '', ['E','C1','C2','R1','R2','R3','R4','D1','D2','D3','D4','D5','D6','D7'])
-
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R1', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R2', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R3', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'R4', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'C1', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'C2', 'Long', '123')
-		#self._helper.client.manipulation.add_dataprop_to_ind('visitedAt', 'E', 'Long', '123')
-
+		
+		_actual_time = str(int(time.time()))
+		
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','E', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','C1', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','C2', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','R1', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','R2', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','R3', 'Long', _actual_time)
+		self._helper.client.manipulation.add_dataprop_to_ind('visitedAt','R4', 'Long', _actual_time)
+		#self._helper.client.manipulation.add_dataprop_to_ind('now','Robot1', 'Long', _actual_time)
+		
 		self._helper.client.utils.apply_buffered_changes()
 		self._helper.client.utils.sync_buffered_reasoner()
+		
+		#self._helper.robot_timestamp_value()
+		
+		#self._helper.client.manipulation.replace_objectprop_b2_ind('visitedAt', 'E', 'Long' '5', '6')
+		#a = self._helper.client.query.dataprop_b2_ind('visitedAt', 'E')
+		#print("VISITED " + str(a))
 
-		#self._helper.client.utils.save_ref_with_inferences(path + "test_ontology_6.owl")
+		# command to save the ontology in a file for using it with Protègè
+		#self._helper.client.utils.save_ref_with_inferences(path + "ontology_name.owl")
