@@ -36,6 +36,7 @@ class Recharge(smach.State):
 					self._recharging_method()
 					return nm.BATTERY_OK
 				if self._pos != nm.RECHARGING_ROOM:
+					self._helper.planner_client.cancel_goal()
 					self._plan_and_go_to_recharge()
 			finally:
 				self._helper.mutex.release()
@@ -58,7 +59,6 @@ class Recharge(smach.State):
 		
 		self._helper.controller_client.wait_for_result()
 		
-		self._helper.choice = nm.RECHARGING_ROOM
 		self._helper.old_loc = self._pos
 		
 		self._helper.client.manipulation.replace_objectprop_b2_ind('isIn', 'Robot1', str(self._helper.choice), str(self._helper.old_loc))
@@ -75,9 +75,9 @@ class Recharge(smach.State):
 		
 		_battery = []
 		for i in range(100):
-			if i % 10 == 0:
-				_battery.append('=')
-			print("[" + ' '.join(_battery) + "] | Battery: " + str(i) + "%", end="\r")
+			if i % 5 == 0:
+				_battery.append('#')
+			print("[" + ''.join(_battery) + "] | Battery: " + str(i) + "%", end="\r")
 			rospy.sleep(0.05)
 			
 		self._helper.action_for_change = nm.BATTERY_OK

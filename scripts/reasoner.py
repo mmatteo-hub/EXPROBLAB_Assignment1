@@ -29,9 +29,12 @@ class Reasoner(smach.State):
 			self._helper.mutex.acquire()
 			try:
 				if self._helper.action_for_change == nm.BATTERY_LOW:
-					self._helper.planner_client.cancel_goal()
-					return nm.BATTERY_LOW
-				if self._helper.action_for_change == nm.LOADED_ONTOLOGY or self._helper.action_for_change == nm.LOCATION_REACHED or self._helper.action_for_change == nm.BATTERY_OK:
+					self._helper.choice = self._check_recharge_location_available()
+					if self._helper.choice != [] or self._helper.format(self._helper.client.query.objectprop_b2_ind('isIn','Robot1'), '#', '>')[0] == nm.RECHARGING_ROOM:
+						return nm.BATTERY_LOW
+					else: self._helper.action_for_change = nm.RECHARGING_CHECK
+						
+				if self._helper.action_for_change == nm.LOADED_ONTOLOGY or self._helper.action_for_change == nm.LOCATION_REACHED or self._helper.action_for_change == nm.BATTERY_OK or self._helper.action_for_change == nm.RECHARGING_CHECK:
 					self._helper.choice = self._check_accessible_location()
 					self._helper.old_loc = self._helper.format(self._helper.client.query.objectprop_b2_ind('isIn','Robot1'), '#', '>')[0]
 					return nm.REASONED
@@ -54,6 +57,12 @@ class Reasoner(smach.State):
 			log_msg = f'No locations reachable from {str(self._helper.choice)} '
 			rospy.loginfo(nm.tag_log(log_msg, nm.REASONER))
 			
+	def _check_recharge_location_available(self):
+		_reachable_E_room = self._check_for_E_room(self._helper.format(self._helper.client.query.objectprop_b2_ind('canReach','Robot1'), '#', '>'))
+		if _reachable_E_room == nm.RECHARGING_ROOM:
+			return nm.RECHARGING_ROOM
+		else: return []
+			
 	def _check_for_corridors(self, _reachable_locations):
 		_corridors = self._helper.format(self._helper.client.query.ind_b2_class('CORRIDOR'), '#', '>')
 		_reachable_corridors = []
@@ -71,6 +80,12 @@ class Reasoner(smach.State):
 				_reachable_urgent.append(_urgent_locations[i])
 				
 		return _reachable_urgent
+		
+	def _check_for_E_room(self, _reachable_locations):
+		for i in range(len(_reachable_locations)):
+			if _reachable_locations[i] == nm.RECHARGING_ROOM:
+				return nm.RECHARGING_ROOM
+		
 			
 	def _choose_destination(self, locations):
 		return random.choice(locations)
