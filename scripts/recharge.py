@@ -2,8 +2,8 @@
 
 """
 .. module:: recahrge
-:platform: ROS
-:synopsis: Class for Recharge state of the finite state machine
+	:platform: ROS
+	:synopsis: Class for Recharge state of the finite state machine
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 

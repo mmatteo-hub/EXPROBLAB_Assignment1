@@ -2,8 +2,8 @@
 
 """
 .. module:: planner
-:platform: ROS
-:synopsis: Class for the Planner server to compute the path
+	:platform: ROS
+	:synopsis: Class for the Planner server to compute the path
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 

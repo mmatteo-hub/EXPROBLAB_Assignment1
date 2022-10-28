@@ -2,8 +2,8 @@
 
 """
 .. module:: plan_path_to_location
-:platform: ROS
-:synopsis: Class for the PlanPathToLocation state of the sub-finite state machine
+	:platform: ROS
+	:synopsis: Class for the PlanPathToLocation state of the sub-finite state machine
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 

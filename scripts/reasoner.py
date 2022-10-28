@@ -2,21 +2,21 @@
 
 """
 .. module:: reasoner
-:platform: ROS
-:synopsis: Class for Reason state of the finite state machine
+	:platform: ROS
+	:synopsis: Class for Reason state of the finite state machine
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class is used to reason the changes in the program execution.
 The changes inclused:
-	- robot position in the environment built;
-	- the choice of the next reachable location the robot will have to reach.
+- robot position in the environment built;
+- the choice of the next reachable location the robot will have to reach.
 All these are computed thanks to the use of the Helper object and few private functions.
 The important thing the reasoner has to take into account is the hierarchy among the locations that it has to choose, in particular:
-	- the robot should stay mainly in the corridors;
-	- as soon as a room becomes urgent the robot has to visit it, if it is reachable by the robot;
-	- the robot has to go to recharge itself in the proper recharging room as soon as the battery is low and the robot can reach that specific location.
-	  For this purpose the recharging room is set as the most urgent among the other as soon as the battery is low so that it has the priority for the robot as soon as it is reachable by it.
+- the robot should stay mainly in the corridors;
+- as soon as a room becomes urgent the robot has to visit it, if it is reachable by the robot;
+- the robot has to go to recharge itself in the proper recharging room as soon as the battery is low and the robot can reach that specific location.
+For this purpose the recharging room is set as the most urgent among the other as soon as the battery is low so that it has the priority for the robot as soon as it is reachable by it.
 The client is taken from the helper object.
 	  
 Clients:

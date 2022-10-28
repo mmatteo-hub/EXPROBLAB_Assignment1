@@ -2,8 +2,8 @@
 
 """
 .. module:: init_state
-:platform: ROS
-:synopsis: Class for the InitState state of the finite state machine
+	:platform: ROS
+	:synopsis: Class for the InitState state of the finite state machine
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 

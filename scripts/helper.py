@@ -2,8 +2,8 @@
 
 """
 .. module:: helper
-:platform: ROS
-:synopsis: Class for help functions
+	:platform: ROS
+	:synopsis: Class for help functions
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 

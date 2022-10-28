@@ -2,8 +2,8 @@
 
 """
 .. module:: go_to_location_to_visit
-:platform: ROS
-:synopsis: Class for the GoToLocationToVisit state of the sub-finite state machine
+	:platform: ROS
+	:synopsis: Class for the GoToLocationToVisit state of the sub-finite state machine
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
