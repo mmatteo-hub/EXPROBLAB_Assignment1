@@ -22,18 +22,19 @@ LOCATION_REACHED = 'LOCATION_REACHED'
 RECHARGING_CHECK = 'RECHARGING_CHECK'
 
 ##########
+# name for the servers, clients and node
 ACTION_PLANNER = 'motion/planner'
 ACTION_CONTROLLER = 'motion/controller'
 NODE_PLANNER = 'planner'
 NODE_CONTROLLER = 'controller'
 NODE_ROBOT_STATE = 'robot-state'
 
-SERVER_GET_POSE = 'state/get_pose'
-SERVER_SET_POSE = 'state/set_pose'
-
 ##########
+# parameter for the battery
 BATTERY_THRESHOLD = 60
+# parameter for the number of points in the path
 NUMBER_OF_POINTS_PATH = 10
+# parameter for the name of the recharging room
 RECHARGING_ROOM = 'E'
 
 ##########
