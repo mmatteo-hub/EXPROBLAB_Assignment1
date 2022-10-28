@@ -37,20 +37,20 @@ LOG_TAG = nm.NODE_CONTROLLER
 class ControllingAction(object):
 
     def __init__(self):
-		"""
-		This function is used to initialize the Controller server
-		
-		Args:
-			none
-		
-		Returns:
-			none
-		"""
+        """
+        This function is used to initialize the Controller server
+
+        Args:
+            none
+
+        Returns:
+            none
+        """
         # Instantiate and start the action server based on the `SimpleActionServer` class.
         self._as = SimpleActionServer(nm.ACTION_CONTROLLER,
-                                      EXPROBLAB_Assignment1.msg.ControlAction,
-                                      execute_cb=self.execute_callback,
-                                      auto_start=False)
+                                        EXPROBLAB_Assignment1.msg.ControlAction,
+                                        execute_cb=self.execute_callback,
+                                        auto_start=False)
         self._as.start()
         # Log information.
         log_msg = (f'`{nm.ACTION_CONTROLLER}` Action Server initialised. It will navigate trough the plan with a fixed delay ' 
@@ -58,17 +58,17 @@ class ControllingAction(object):
         rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
 
     def execute_callback(self, goal):
-		"""
-		Function that is executed every time the machine needs to simulate the movement of the robot between two locations.
-		The callback invoked when a client set a goal to the `controller` server.
-		This function requires a list of via points (the plan), and it simulates a movement through each point with a fixed delay.
-	
-		Args:
-			none
-		
-		Returns:
-			none
-		"""
+        """
+        Function that is executed every time the machine needs to simulate the movement of the robot between two locations.
+        The callback invoked when a client set a goal to the `controller` server.
+        This function requires a list of via points (the plan), and it simulates a movement through each point with a fixed delay.
+
+        Args:
+            none
+
+        Returns:
+            none
+        """
         # Check if the provided plan is processable. If not, this service will be aborted.
         if goal is None or goal.via_points is None or len(goal.via_points) == 0:
             rospy.logerr(nm.tag_log('No via points provided! This service will be aborted!', LOG_TAG))
