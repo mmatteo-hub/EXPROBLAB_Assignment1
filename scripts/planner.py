@@ -38,20 +38,20 @@ LOG_TAG = nm.NODE_PLANNER
 # An action server to simulate motion planning.
 class PlaningAction(object):
     def __init__(self):
-		"""
-		This function is used to initialize the Planner server
-		
-		Args:
-			none
-		
-		Returns:
-			none
-		"""
+        """
+        This function is used to initialize the Planner server
+
+        Args:
+            none
+
+        Returns:
+            none
+        """
         # Instantiate and start the action server based on the `SimpleActionServer` class.
         self._as = SimpleActionServer(nm.ACTION_PLANNER, 
-                                      EXPROBLAB_Assignment1.msg.PlanAction, 
-                                      execute_cb=self.execute_callback, 
-                                      auto_start=False)
+                                        EXPROBLAB_Assignment1.msg.PlanAction, 
+                                        execute_cb=self.execute_callback, 
+                                        auto_start=False)
 
         self._as.start()
 
@@ -59,19 +59,19 @@ class PlaningAction(object):
         log_msg = (f'`{nm.ACTION_PLANNER}` Action Server initialised. It will create random path with a number of point '
                    f'[{nm.NUMBER_OF_POINTS_PATH}). Each point will be generated with a fixed delay.')
       
-		rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
+        rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
     def execute_callback(self, goal):
-		"""
-		Function that is executed every time the machine needs to compute a plan from two locations.
-		The callback invoked when a client set a goal to the `planner` server.
-		This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the `target` position (passed as goal.target parameter).
-    
-		Args:
-			none
-			
-		Returns:
-			none
-		"""
+        """
+        Function that is executed every time the machine needs to compute a plan from two locations.
+        The callback invoked when a client set a goal to the `planner` server.
+        This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the `target` position (passed as goal.target parameter).
+
+        Args:
+            none
+            
+        Returns:
+            none
+        """
         # Get the input parameters to compute the plan, i.e., the start (or current) and target positions from the client goal fields.
         start_point = goal.start
         target_point = goal.target
