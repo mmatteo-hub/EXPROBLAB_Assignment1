@@ -1,5 +1,22 @@
 #! /usr/bin/env python
 
+"""
+.. module:: planner
+:platform: ROS
+:synopsis: Class for the Planner server to compute the path
+
+.. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
+
+This class is the server used by the FSM to compute the path for the robot from a starting position to a target one.	
+Each position in the environment used is associated to a point coordinate [float x, float y] according to the list in the :mod:``name_mapper` file.
+The plan is computed as a linear space on 'n' points between the two coordinates (the number of points is set in the same file as before).
+The server computes the path and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.
+
+Servers:
+	motion/planner: server used to plan the path between the two position passed as goal input to the server.
+
+"""
+
 import random
 import rospy
 import numpy as np
@@ -19,15 +36,17 @@ LOG_TAG = nm.NODE_PLANNER
 
 
 # An action server to simulate motion planning.
-# Given a target position, it retrieve the current robot position from the 
-# client query node, and return a plan as a set of via points.
 class PlaningAction(object):
-
     def __init__(self):
-        # Get random-based parameters used by this server
-        #self._random_plan_points = rospy.get_param(nm.PARAM_PLANNER_POINTS, [2, 8])
-        #self._random_plan_time = rospy.get_param(nm.PARAM_PLANNER_TIME, [0.1, 1])
-        #self._environment_size = rospy.get_param(nm.PARAM_ENVIRONMENT_SIZE)
+		"""
+		This function is used to initialize the Planner server
+		
+		Args:
+			none
+		
+		Returns:
+			none
+		"""
         # Instantiate and start the action server based on the `SimpleActionServer` class.
         self._as = SimpleActionServer(nm.ACTION_PLANNER, 
                                       EXPROBLAB_Assignment1.msg.PlanAction, 
@@ -37,19 +56,22 @@ class PlaningAction(object):
         self._as.start()
 
         # Log information.
-        #log_msg = (f'`{nm.ACTION_PLANNER}` Action Server initialised. It will create random path with a number of point '
-         #          f'spanning in [{self._random_plan_points[0]}, {self._random_plan_points[1]}). Each point will be generated '
-          #         f'with a delay spanning in [{self._random_plan_time[0]}, {self._random_plan_time[1]}).')
+        log_msg = (f'`{nm.ACTION_PLANNER}` Action Server initialised. It will create random path with a number of point '
+                   f'[{nm.NUMBER_OF_POINTS_PATH}). Each point will be generated with a fixed delay.')
       
-    # The callback invoked when a client set a goal to the `planner` server.
-    # This function will return a list of random points (i.e., the plan) when the fist point
-    # is the current robot position (retrieved from the the query client), while the last 
-    # point is the `goal` position (given as input parameter). The plan will contain 
-    # a random number of other points, which spans in the range 
-    # [`self._random_plan_points[0]`, `self._random_plan_points[1]`). To simulate computation,
-    # each point is added to the plan with a random delay spanning in the range 
-    # [`self._random_plan_time[0]`, `self._random_plan_time[1]`).
+		rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
     def execute_callback(self, goal):
+		"""
+		Function that is executed every time the machine needs to compute a plan from two locations.
+		The callback invoked when a client set a goal to the `planner` server.
+		This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the `target` position (passed as goal.target parameter).
+    
+		Args:
+			none
+			
+		Returns:
+			none
+		"""
         # Get the input parameters to compute the plan, i.e., the start (or current) and target positions from the client goal fields.
         start_point = goal.start
         target_point = goal.target
@@ -61,11 +83,11 @@ class PlaningAction(object):
         # Publish the feedback and wait to simulate computation.
         self._as.publish_feedback(feedback)
 
-        # Get a random number of via points to be included in the plan.
-        #number_of_points = random.randint(self._random_plan_points[0], self._random_plan_points[1] + 1)
+        # Log message to publish the number of points in the plan
         log_msg = f'Server is planning {nm.NUMBER_OF_POINTS_PATH} points...'
         rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
         
+        # computing the linspace for the x and y coordinates
         x = np.linspace(start_point.x, target_point.x, nm.NUMBER_OF_POINTS_PATH)
         y = np.linspace(start_point.y, target_point.y, nm.NUMBER_OF_POINTS_PATH)
 
@@ -98,12 +120,6 @@ class PlaningAction(object):
         rospy.loginfo(nm.tag_log(log_msg, LOG_TAG))
         self._as.set_succeeded(result)
         return  # Succeeded.
-
-    # Check if the point is within the environment bounds, i.e.
-    # x: [0, `self._environment_size[0]`], and y: [0, `self._environment_size[1]`].
-    def _is_valid(self, point):
-        return 0.0 <= point.x <= 10 and 0.0 <= point.y <= 10
-
 
 if __name__ == '__main__':
     # Initialise the node, its action server, and wait.    
