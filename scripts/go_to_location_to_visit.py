@@ -4,11 +4,11 @@
 .. module:: go_to_location_to_visit
 	:platform: ROS
 	:synopsis: Class for the GoToLocationToVisit state of the sub-finite state machine
-
+	
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class is a state of the sub-state machine *move random*. This class has the aim to move the robot through the path computed in the previous state.
-The path is taken from the planner client by taking its result and then it is passed to the controller one. This uses the :mod:``controller` to make the robot move through the points of the path.
+The path is taken from the planner client by taking its result and then it is passed to the controller one. This uses the :mod:`controller` to make the robot move through the points of the path.
 This state is a little trivial since it is used both to move the robot from a location to another both to drive it to the recharging room when necessary and when possible.
 Due to this as soon as the robot has a location that has to reach, this location is reached and then, depending of the variable shared by the Helper, it can be retrieved if the move was just a random movement or it was needed to reach a location from which the recharging room is reachable.
 The clients are taken from the helper object.

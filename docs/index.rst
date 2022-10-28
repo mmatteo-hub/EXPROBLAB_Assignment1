@@ -49,7 +49,7 @@ Recharge Module
   
 Plan Path To Location Module
 ============================
-.. automodule:: scripts.plan_path_to_module
+.. automodule:: scripts.plan_path_to_location
 	:members:
 
 Go To Location To Visit Module
