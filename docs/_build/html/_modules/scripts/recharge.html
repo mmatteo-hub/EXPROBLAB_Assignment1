@@ -150,7 +150,7 @@
 				<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">mutex</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 			<span class="n">rospy</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span></div>
 			
-	<span class="k">def</span> <span class="nf">_check_rob_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Recharge._check_rob_pos"><a class="viewcode-back" href="../../index.html#scripts.recharge.Recharge._check_rob_pos">[docs]</a>	<span class="k">def</span> <span class="nf">_check_rob_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Private function that checks the robot position with a query by the aRMOR client to the respective server.</span>
 <span class="sd">		</span>
@@ -160,9 +160,9 @@
 <span class="sd">		Returns:</span>
 <span class="sd">			location(String): actual location of the robot</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">objectprop_b2_ind</span><span class="p">(</span><span class="s1">&#39;isIn&#39;</span><span class="p">,</span><span class="s1">&#39;Robot1&#39;</span><span class="p">),</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">objectprop_b2_ind</span><span class="p">(</span><span class="s1">&#39;isIn&#39;</span><span class="p">,</span><span class="s1">&#39;Robot1&#39;</span><span class="p">),</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
-	<span class="k">def</span> <span class="nf">_plan_and_go_to_recharge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Recharge._plan_and_go_to_recharge"><a class="viewcode-back" href="../../index.html#scripts.recharge.Recharge._plan_and_go_to_recharge">[docs]</a>	<span class="k">def</span> <span class="nf">_plan_and_go_to_recharge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Private function that is used to plan the path to the recharging location and move the robot to that position before recharging it.</span>
 <span class="sd">		</span>
@@ -193,9 +193,9 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">reason_changes</span><span class="p">()</span>
 		
 		<span class="n">log_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Robot in recharging room &#39;</span>
-		<span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">nm</span><span class="o">.</span><span class="n">tag_log</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">nm</span><span class="o">.</span><span class="n">RECHARGE</span><span class="p">))</span>
+		<span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">nm</span><span class="o">.</span><span class="n">tag_log</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">nm</span><span class="o">.</span><span class="n">RECHARGE</span><span class="p">))</span></div>
 
-	<span class="k">def</span> <span class="nf">_recharging_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Recharge._recharging_method"><a class="viewcode-back" href="../../index.html#scripts.recharge.Recharge._recharging_method">[docs]</a>	<span class="k">def</span> <span class="nf">_recharging_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Private function that performs the recharging on the robot if and only if when it is located in the recharging room.</span>
 <span class="sd">		</span>
@@ -216,7 +216,7 @@
 			<span class="n">rospy</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
 			
 		<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">action_for_change</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">BATTERY_OK</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">battery_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span></div>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">battery_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span></div></div>
 		
 </pre></div>
 
