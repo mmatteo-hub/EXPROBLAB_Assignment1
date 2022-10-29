@@ -180,7 +180,7 @@ class Helper:
 		The output represents the last time the location was visited by the robot
 		
 		Args:
-			location(Stirng): name of the location the timestamp is required for
+			location(String): name of the location the timestamp is required for
 			
 		Returns:
 			timestamp(String): timestamp of the location casted as a string

@@ -14,12 +14,12 @@ However, the main role of the helper is the share of the mutex that is used to a
 The state machine that has been created is composed mainly of four states: *inititalization state*, *reason state*, *move random state* and *recharge*.
 Of course this states includes many different tasks so the decision of using some sub-machines allows us to have a more modular code and a more reactive program since the execution of the states are not so long.
 For this case we divided the machine as follows:
-- initialization phase;
-- reason state: responsible of reasoning the changing happened and computing the new location the robot has to visit (according to some statements);
-- mode random state: divided into :mod:`plan_path_to_location` and :mod:`go_to_location_to_visit`.
+* initialization phase;
+* reason state: responsible of reasoning the changing happened and computing the new location the robot has to visit (according to some statements);
+* mode random state: divided into :mod:`plan_path_to_location` and :mod:`go_to_location_to_visit`.
 The first is responsible of computing a path from the actual robot position to the target position computed by the reasoner;
 the second is responsible of moving the robot through the points of the path just computed.
-- recharge state: it is responsible of recharging the robot battery. The robot can be recharged if and only if it is in the correct recharging room so there are some computation to make the robot arrive there before being recharged.
+* recharge state: it is responsible of recharging the robot battery. The robot can be recharged if and only if it is in the correct recharging room so there are some computation to make the robot arrive there before being recharged.
 
 Servers:
 	sis: this is the name that the variable of the ROS server has in the program. It is necessary for the smach ROS state machine and it is responsible of the execution of each state and their transitions.
