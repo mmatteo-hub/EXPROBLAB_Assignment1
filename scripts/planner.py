@@ -80,8 +80,6 @@ class PlaningAction(object):
         feedback = PlanFeedback()
         feedback.via_points = []
         feedback.via_points.append(start_point)
-        # Publish the feedback and wait to simulate computation.
-        self._as.publish_feedback(feedback)
 
         # Log message to publish the number of points in the plan
         log_msg = f'Server is planning {nm.NUMBER_OF_POINTS_PATH} points...'
