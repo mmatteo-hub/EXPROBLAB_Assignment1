@@ -1,4 +1,5 @@
 scripts/__pycache__/*
+utilities/EXPROBLAB_Assignment1/__pycache__
 devel/
 logs/
 build/
