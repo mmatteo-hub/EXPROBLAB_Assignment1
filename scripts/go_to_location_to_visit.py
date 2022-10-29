@@ -81,6 +81,10 @@ class GoToLocationToVisit(smach.State):
 					
 					self._helper.update_timestamp()
 					
+					log_msg = f'Doing something in the location {str(self._helper.choice)} '
+					rospy.loginfo(nm.tag_log(log_msg, nm.GO_TO_LOCATION_TO_VISIT))
+					rospy.sleep(nm.BUSY_PARAMETER)
+					
 					# if the reasoner is checking for the recharging room but it cannot reach it directly because in a location no directly connected to the recharging one,
 					# then it move the robot into another location and try to reach the recharging room from this new one
 					if self._helper.action_for_change == nm.RECHARGING_CHECK:
