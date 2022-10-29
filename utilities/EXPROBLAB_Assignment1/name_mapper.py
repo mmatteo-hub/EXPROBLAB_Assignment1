@@ -32,6 +32,8 @@ NODE_ROBOT_STATE = 'robot-state'
 ##########
 # parameter for the battery
 BATTERY_THRESHOLD = 60
+# parameter for the wait of the robot in a room
+BUSY_PARAMETER = 3
 # parameter for the number of points in the path
 NUMBER_OF_POINTS_PATH = 10
 # parameter for the name of the recharging room
