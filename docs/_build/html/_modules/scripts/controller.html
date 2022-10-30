@@ -78,7 +78,7 @@
 <span class="sd">The server simulates the movement of the robot and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.</span>
 
 <span class="sd">Servers:</span>
-<span class="sd">	motion/controller: server used to simulate the movement of the robot.</span>
+<span class="sd">	:attr:`motion/controller`: server used to simulate the movement of the robot.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -126,7 +126,7 @@
 <div class="viewcode-block" id="ControllingAction.execute_callback"><a class="viewcode-back" href="../../index.html#scripts.controller.ControllingAction.execute_callback">[docs]</a>    <span class="k">def</span> <span class="nf">execute_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function that is executed every time the machine needs to simulate the movement of the robot between two locations.</span>
-<span class="sd">        The callback invoked when a client set a goal to the `controller` server.</span>
+<span class="sd">        The callback invoked when a client set a goal to the :mod:`controller` server.</span>
 <span class="sd">        This function requires a list of via points (the plan), and it simulates a movement through each point with a fixed delay.</span>
 
 <span class="sd">        Args:</span>

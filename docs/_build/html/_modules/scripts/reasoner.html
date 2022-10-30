@@ -75,18 +75,22 @@
 
 <span class="sd">This class is used to reason the changes in the program execution.</span>
 <span class="sd">The changes inclused:</span>
-<span class="sd">- robot position in the environment built;</span>
-<span class="sd">- the choice of the next reachable location the robot will have to reach.</span>
+
+<span class="sd">* robot position in the environment built;</span>
+<span class="sd">* the choice of the next reachable location the robot will have to reach.</span>
+
 <span class="sd">All these are computed thanks to the use of the Helper object and few private functions.</span>
 <span class="sd">The important thing the reasoner has to take into account is the hierarchy among the locations that it has to choose, in particular:</span>
-<span class="sd">- the robot should stay mainly in the corridors;</span>
-<span class="sd">- as soon as a room becomes urgent the robot has to visit it, if it is reachable by the robot;</span>
-<span class="sd">- the robot has to go to recharge itself in the proper recharging room as soon as the battery is low and the robot can reach that specific location.</span>
+
+<span class="sd">* the robot should stay mainly in the corridors;</span>
+<span class="sd">* as soon as a room becomes urgent the robot has to visit it, if it is reachable by the robot;</span>
+<span class="sd">* the robot has to go to recharge itself in the proper recharging room as soon as the battery is low and the robot can reach that specific location.</span>
+
 <span class="sd">For this purpose the recharging room is set as the most urgent among the other as soon as the battery is low so that it has the priority for the robot as soon as it is reachable by it.</span>
 <span class="sd">The client is taken from the helper object.</span>
 
 <span class="sd">Clients:</span>
-<span class="sd">	client: aRMOR client to make the query request to the respective server to take the infos from the actual situation of the robot and the location in the environment</span>
+<span class="sd">	:attr:`client`: aRMOR client to make the query request to the respective server to take the infos from the actual situation of the robot and the location in the environment</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -156,9 +160,11 @@
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Private function that checks for the reachable locations of the robot when it is in a certain location.</span>
 <span class="sd">		Its main functionality is to return the list of reachable location that are needed: in particular it has to follow the hierarchy of the program:</span>
+<span class="sd">		</span>
 <span class="sd">		* urgent location (if any);</span>
 <span class="sd">		* corridors (if there are not any urgent and if there are any corridors reachable);</span>
 <span class="sd">		* general location (if none of the previous returned something)</span>
+<span class="sd">		</span>
 <span class="sd">		The choice is computed randomly among the list that are found and returned.</span>
 <span class="sd">		</span>
 <span class="sd">		Args:</span>

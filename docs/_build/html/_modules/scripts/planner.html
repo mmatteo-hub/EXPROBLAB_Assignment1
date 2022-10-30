@@ -79,7 +79,7 @@
 <span class="sd">The server computes the path and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.</span>
 
 <span class="sd">Servers:</span>
-<span class="sd">	motion/planner: server used to plan the path between the two position passed as goal input to the server.</span>
+<span class="sd">	:attr:`motion/planner`: server used to plan the path between the two position passed as goal input to the server.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -129,8 +129,8 @@
 <div class="viewcode-block" id="PlaningAction.execute_callback"><a class="viewcode-back" href="../../index.html#scripts.planner.PlaningAction.execute_callback">[docs]</a>    <span class="k">def</span> <span class="nf">execute_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function that is executed every time the machine needs to compute a plan from two locations.</span>
-<span class="sd">        The callback invoked when a client set a goal to the `planner` server.</span>
-<span class="sd">        This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the `target` position (passed as goal.target parameter).</span>
+<span class="sd">        The callback invoked when a client set a goal to the :mod:`planner` server.</span>
+<span class="sd">        This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the *target* position (passed as :attr:`goal.target` parameter).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            none</span>
@@ -146,8 +146,6 @@
         <span class="n">feedback</span> <span class="o">=</span> <span class="n">PlanFeedback</span><span class="p">()</span>
         <span class="n">feedback</span><span class="o">.</span><span class="n">via_points</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">feedback</span><span class="o">.</span><span class="n">via_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_point</span><span class="p">)</span>
-        <span class="c1"># Publish the feedback and wait to simulate computation.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_as</span><span class="o">.</span><span class="n">publish_feedback</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
 
         <span class="c1"># Log message to publish the number of points in the plan</span>
         <span class="n">log_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Server is planning </span><span class="si">{</span><span class="n">nm</span><span class="o">.</span><span class="n">NUMBER_OF_POINTS_PATH</span><span class="si">}</span><span class="s1"> points...&#39;</span>

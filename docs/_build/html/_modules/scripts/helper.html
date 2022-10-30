@@ -77,12 +77,12 @@
 <span class="sd">In particular this helper provides all the action clients used and needed to control the robot plus other functions used to retrieve informations from the data/queries acquired.</span>
 
 <span class="sd">Clients:</span>
-<span class="sd">	armor_client: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retireve information about the robot position</span>
+<span class="sd">	:attr:`armor_client`: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retireve information about the robot position</span>
 <span class="sd">	and its possibility to reach a particular location.</span>
 <span class="sd">	</span>
-<span class="sd">	motion_planner: client to communicate with the planner server. This client is used to give the sever a start an a target position and the server provides a plan of points that the robot will have to follow.</span>
+<span class="sd">	:attr:`motion_planner`: client to communicate with the planner server. This client is used to give the sever a start an a target position and the server provides a plan of points that the robot will have to follow.</span>
 <span class="sd">	</span>
-<span class="sd">	motion_controller: client to communicate with the controller server. The client is responsible of moving the robot, so it has to give the robot the planner client points and makes it follow them to reach the target position.</span>
+<span class="sd">	:attr:`motion_controller`: client to communicate with the controller server. The client is responsible of moving the robot, so it has to give the robot the planner client points and makes it follow them to reach the target position.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -213,7 +213,7 @@
 <div class="viewcode-block" id="Helper._target_coordiantes"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper._target_coordiantes">[docs]</a>	<span class="k">def</span> <span class="nf">_target_coordiantes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_location</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to retrieve the room coordinates (x and y) from its name.</span>
-<span class="sd">		The function works with the help of the name_mapper.py file that stores both the name and the corresponding coordinates for each location in the ontology.</span>
+<span class="sd">		The function works with the help of the :mod:`name_mapper.py` file that stores both the name and the corresponding coordinates for each location in the ontology.</span>
 <span class="sd">		</span>
 <span class="sd">		Args:</span>
 <span class="sd">			_location(String): string containing the name of the location</span>
