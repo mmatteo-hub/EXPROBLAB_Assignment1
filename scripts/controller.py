@@ -12,7 +12,7 @@ The path to follow is passed by the client. The controller starts as soon as the
 The server simulates the movement of the robot and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.
 
 Servers:
-	motion/controller: server used to simulate the movement of the robot.
+	:attr:`motion/controller`: server used to simulate the movement of the robot.
 
 """
 
@@ -60,7 +60,7 @@ class ControllingAction(object):
     def execute_callback(self, goal):
         """
         Function that is executed every time the machine needs to simulate the movement of the robot between two locations.
-        The callback invoked when a client set a goal to the `controller` server.
+        The callback invoked when a client set a goal to the :mod:`controller` server.
         This function requires a list of via points (the plan), and it simulates a movement through each point with a fixed delay.
 
         Args:

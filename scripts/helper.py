@@ -11,12 +11,12 @@ This class implements an helper member that can be usde in the program it is inc
 In particular this helper provides all the action clients used and needed to control the robot plus other functions used to retrieve informations from the data/queries acquired.
 
 Clients:
-	armor_client: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retireve information about the robot position
+	:attr:`armor_client`: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retireve information about the robot position
 	and its possibility to reach a particular location.
 	
-	motion_planner: client to communicate with the planner server. This client is used to give the sever a start an a target position and the server provides a plan of points that the robot will have to follow.
+	:attr:`motion_planner`: client to communicate with the planner server. This client is used to give the sever a start an a target position and the server provides a plan of points that the robot will have to follow.
 	
-	motion_controller: client to communicate with the controller server. The client is responsible of moving the robot, so it has to give the robot the planner client points and makes it follow them to reach the target position.
+	:attr:`motion_controller`: client to communicate with the controller server. The client is responsible of moving the robot, so it has to give the robot the planner client points and makes it follow them to reach the target position.
 """
 
 import sys
@@ -147,7 +147,7 @@ class Helper:
 	def _target_coordiantes(self, _location):
 		"""
 		Function to retrieve the room coordinates (x and y) from its name.
-		The function works with the help of the name_mapper.py file that stores both the name and the corresponding coordinates for each location in the ontology.
+		The function works with the help of the :mod:`name_mapper.py` file that stores both the name and the corresponding coordinates for each location in the ontology.
 		
 		Args:
 			_location(String): string containing the name of the location

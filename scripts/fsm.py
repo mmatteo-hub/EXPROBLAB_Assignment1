@@ -11,18 +11,21 @@ This script is used to define the finite state machine. Here it is initialized w
 For each state it is defined how to behave for each transition so that the machine cannot be stuck or having errors in the change.
 At the beginning it is also instantiated a helper entity that will be passed to each state to make it easier in some cases to use functions and shared variables.
 However, the main role of the helper is the share of the mutex that is used to access the shared variables without having troubles doing it.
-The state machine that has been created is composed mainly of four states: *inititalization state*, *reason state*, *move random state* and *recharge*.
+The state machine that has been created is composed mainly of four states: :mod:`ìnit_state`, :mod:`reasoner`, *move randomly*, which is a sub machine, and :mod:`recharge`.
 Of course this states includes many different tasks so the decision of using some sub-machines allows us to have a more modular code and a more reactive program since the execution of the states are not so long.
 For this case we divided the machine as follows:
+
 * initialization phase;
 * reason state: responsible of reasoning the changing happened and computing the new location the robot has to visit (according to some statements);
-* mode random state: divided into :mod:`plan_path_to_location` and :mod:`go_to_location_to_visit`.
+* move random state: divided into :mod:`plan_path_to_location` and :mod:`go_to_location_to_visit`.
+
 The first is responsible of computing a path from the actual robot position to the target position computed by the reasoner;
 the second is responsible of moving the robot through the points of the path just computed.
+
 * recharge state: it is responsible of recharging the robot battery. The robot can be recharged if and only if it is in the correct recharging room so there are some computation to make the robot arrive there before being recharged.
 
 Servers:
-	sis: this is the name that the variable of the ROS server has in the program. It is necessary for the smach ROS state machine and it is responsible of the execution of each state and their transitions.
+	:attr:`sis`: this is the name that the variable of the ROS server has in the program. It is necessary for the smach ROS state machine and it is responsible of the execution of each state and their transitions.
 """
 
 import roslib
@@ -42,7 +45,7 @@ from go_to_location_to_visit import GoToLocationToVisit
 
 def main():
 	"""
-	This function initializes the state machine node, called 'smach_finite_state_machine'.
+	This function initializes the state machine node, called _smach_finite_state_machine_.
 	It also create the helper object to make it easier to access variables and use functions.
 	It is important to note that the SMACH machine needs the definition of all the outcomes needed to pass from one state to another: in this way if the execute of one state returned a transition that is not included, the machine would return an error or would remain stuck because not knowing what to do.
 	The machine includes also some sub-machines, since we have four main state that can be divided into many others to have a more modular architecture.

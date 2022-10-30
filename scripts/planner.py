@@ -13,7 +13,7 @@ The plan is computed as a linear space on 'n' points between the two coordinates
 The server computes the path and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.
 
 Servers:
-	motion/planner: server used to plan the path between the two position passed as goal input to the server.
+	:attr:`motion/planner`: server used to plan the path between the two position passed as goal input to the server.
 
 """
 
@@ -63,8 +63,8 @@ class PlaningAction(object):
     def execute_callback(self, goal):
         """
         Function that is executed every time the machine needs to compute a plan from two locations.
-        The callback invoked when a client set a goal to the `planner` server.
-        This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the `target` position (passed as goal.target parameter).
+        The callback invoked when a client set a goal to the :mod:`planner` server.
+        This function will return a list of points (the plan) where the fist point is the current robot position (passed as goal.start parameter), while the last point is the *target* position (passed as :attr:`goal.target` parameter).
 
         Args:
             none

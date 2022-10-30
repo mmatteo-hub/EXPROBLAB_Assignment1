@@ -8,13 +8,13 @@
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class is a state of the sub-state machine *move random*. This class has the aim to compute a plan of *n* points from the actual position of the robot to the target location given by the reasoner.
-The number of points is a parameter specified in the :mod:`name_mapper` file.
-The class call the *plan_location* function from the helper object, previously initialized, which uses the :mod:`planner` server to compute the path.
+The number of points is a parameter specified in the :mod:`name_mapper.py` file.
+The class call the :func:`plan_location` function from the helper object, previously initialized, which uses the :mod:`planner` server to compute the path.
 As soon as the server gives to the client the response with the result of the path the the sub-machine passes to the next state.
 The client is taken from the helper object.
 
 Clients:
-	planner_client: client that makes the request to the respective server to take the path from the starting to the end position for the robot
+	:attr:`planner_client`: client that makes the request to the respective server to take the path from the starting to the end position for the robot
 """
 
 import sys

@@ -7,16 +7,18 @@
 	
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
-This class is a state of the sub-state machine *move random*. This class has the aim to move the robot through the path computed in the previous state.
-The path is taken from the planner client by taking its result and then it is passed to the controller one. This uses the :mod:`controller` to make the robot move through the points of the path.
+This class is a state of the sub-state machine *move randomly*. This class has the aim to move the robot through the path computed in the previous state.
+The path is taken from the :mod:`planner` client by taking its result provided by the respsctive server and then it is passed to the :mod:`controller` ones. This uses the :mod:`controller` to make the robot move through the points of the path.
 This state is a little trivial since it is used both to move the robot from a location to another both to drive it to the recharging room when necessary and when possible.
 Due to this as soon as the robot has a location that has to reach, this location is reached and then, depending of the variable shared by the Helper, it can be retrieved if the move was just a random movement or it was needed to reach a location from which the recharging room is reachable.
 The clients are taken from the helper object.
 
 Clients:
-	client: aRMOR client used to update the timestamp of the robot and of the location the robot has just visited
-	planner_client: client from which it is taken the goal, which means the path just computed to be passed to the controller.
-	controller_client: client that makes the request to the respective server to move the robot through the path from the starting to the end position.
+	:attr:`client`: aRMOR client used to update the timestamp of the robot and of the location the robot has just visited
+	
+	:attr:`planner_client`: client from which it is taken the goal, which means the path just computed to be passed to the controller.
+	
+	:attr:`controller_client`: client that makes the request to the respective server to move the robot through the path from the starting to the end position.
 """
 
 import sys

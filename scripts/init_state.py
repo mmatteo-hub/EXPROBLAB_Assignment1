@@ -16,7 +16,7 @@ The steps are computed thanks to the use of the aRMOR client that provides query
 The client is taken from the helper object.
 
 Clients:
-	client: aRMOR client used from the helper entity to sedn request to the respective server
+	:attr:`client`: aRMOR client used from the helper entity to send request to the respective server
 
 """
 

@@ -17,9 +17,9 @@ The location of the robot is checked by a query by the aRMOR client and its resp
 The clients are taken from the helper object initialized in the state.
 
 Clients:
-	client: aRMOR client used to update the timestamp of the robot and of the location the robot has just visited
-	planner_client: client from which it is taken the goal, which means the path just computed to be passed to the controller.
-	controller_client: client that makes the request to the respective server to move the robot through the path from the starting to the end position.
+	:attr:`client`: aRMOR client used to update the timestamp of the robot and of the location the robot has just visited
+	:attr:`planner_client`: client from which it is taken the goal, which means the path just computed to be passed to the controller.
+	:attr:`controller_client`: client that makes the request to the respective server to move the robot through the path from the starting to the end position.
 """
 
 import sys
