@@ -108,13 +108,13 @@ class Recharge(smach.State):
 		"""
 		_goal = self._helper.plan_location(nm.RECHARGING_ROOM)
 		self._helper.planner_client.send_goal(_goal)
-		log_msg = f'Planning the robot to Recharge '
+		log_msg = f'Planning the path to the recharging room \033[0;36;49m' + str(nm.RECHARGING_ROOM) + '\033[0m'
 		rospy.loginfo(nm.tag_log(log_msg, nm.RECHARGE))
 		
 		self._helper.planner_client.wait_for_result()
 		self._helper.controller_client.send_goal(self._helper.planner_client.get_result())
 		
-		log_msg = f'Moving the robot to Recharge '
+		log_msg = f'Moving the robot to the recharging room \033[0;36;49m' + str(nm.RECHARGING_ROOM) + '\033[0m'
 		rospy.loginfo(nm.tag_log(log_msg, nm.RECHARGE))
 		
 		self._helper.controller_client.wait_for_result()
@@ -126,7 +126,7 @@ class Recharge(smach.State):
 		self._helper.update_timestamp()
 		self._helper.reason_changes()
 		
-		log_msg = f'Robot in recharging room '
+		log_msg = f'Robot in recharging room \033[0;36;49m' + str(nm.RECHARGING_ROOM) + '\033[0m'
 		rospy.loginfo(nm.tag_log(log_msg, nm.RECHARGE))
 
 	def _recharging_method(self):
@@ -139,16 +139,21 @@ class Recharge(smach.State):
 		Returns:
 			none
 		"""
-		log_msg = f'Robot is recharging'
+		log_msg = f'Robot in \033[0;36;49m' + str(nm.RECHARGING_ROOM) + '\033[0m is recharging'
 		rospy.loginfo(nm.tag_log(log_msg, nm.RECHARGE))
 		
 		_battery = []
 		for i in range(100):
 			if i % 5 == 0:
 				_battery.append('#')
-			print("[" + ''.join(_battery) + "] | Battery: " + str(i) + "%", end="\r")
+			if i <= 20:
+				print("[\033[1;31;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;31;49m" + str(i) + "\033[0m %", end="\r")
+			elif 20 < i <= 70:
+				print("[\033[1;33;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;33;49m" + str(i) + "\033[0m %", end="\r")
+			elif i > 70:
+				print("[\033[1;32;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;32;49m" + str(i) + "\033[0m %", end="\r")
 			rospy.sleep(0.05)
-			
+		
 		self._helper.action_for_change = nm.BATTERY_OK
 		self._helper.battery_timestamp = int(time.time())
 		
