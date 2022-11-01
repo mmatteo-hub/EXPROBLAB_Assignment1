@@ -10,7 +10,7 @@
 This class is the server used by the FSM to compute the path for the robot from a starting position to a target one.	
 Each position in the environment used is associated to a point coordinate [float x, float y] according to the list in the :mod:`name_mapper` file.
 The plan is computed as a linear space on 'n' points between the two coordinates (the number of points is set in the same file as before).
-The server computes the path and then publish the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.
+The server computes the path and then publishes the result. In case the process is interrupted due to some signals (a battery low for example), then it returns nothing because of the preemption.
 
 Servers:
 	:attr:`motion/planner`: server used to plan the path between the two position passed as goal input to the server.

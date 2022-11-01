@@ -11,7 +11,7 @@ This class represents the initial state of the state machine. It is the first st
 It is responsible of instantiating a type helper to use the useful functions there provided. Then it use a private function to start modifying the ontology given as reference.
 It adds all the parameters to the locations, doors, so that the reasoner will be able to know which one communicates with; it later sets that all the elements are different so that there cannot be ambiguities.
 At the end of this process it is also retrieve the actual time in the execution and it is add among the properties of the entities so that it can be modified later when necessary.
-The execution ends with a return that allows the main program to pass to the next state of the finite stat machine.
+The execution ends with a return that allows the main program to pass to the next state of the finite state machine.
 The steps are computed thanks to the use of the aRMOR client that provides query to the respective server to modify and use the parameters.
 The client is taken from the helper object.
 
@@ -83,10 +83,10 @@ class InitState(smach.State):
 		"""
 		Function used to store all the request to the aRMOR server, through the client, to modifiy the onotlogy.
 		In particular it uses a pre-built ontology that is stored in the project folder and it modifies it by adding entities and properties.
-		It add entities, it add them properties, doors and it add the timestamp.
+		It adds entities, it adds them properties, doors and it adds the timestamp.
 		When it ends it returns to the execute function and it changes state.
 		
-		(There is also the possibility to save the ontology in another .owl file, and this can be done by un-commenting the last line of code)
+		(There is also the possibility to save the ontology in another .owl file, and this can be done by un-commenting the last line of code of this script)
 		
 		Args:
 			none

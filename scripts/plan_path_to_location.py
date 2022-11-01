@@ -8,7 +8,7 @@
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class is a state of the sub-state machine *move random*. This class has the aim to compute a plan of *n* points from the actual position of the robot to the target location given by the reasoner.
-The number of points is a parameter specified in the :mod:`name_mapper.py` file.
+The number of points is a parameter specified in the :mod:`name_mapper` file.
 The class call the :func:`plan_location` function from the helper object, previously initialized, which uses the :mod:`planner` server to compute the path.
 As soon as the server gives to the client the response with the result of the path the the sub-machine passes to the next state.
 The client is taken from the helper object.
@@ -57,7 +57,7 @@ class PlanPathToLocation(smach.State):
 			userdata:
 			
 		Returns:
-			transition(String): string containing the label of the action performed and used to change state in the sub machine.
+			transition(String): string containing the label of the action performed and used to change state in the sub-machine.
 		"""
 		# function called when exiting from the node, it can be blacking
 		rospy.loginfo('Executing state ' + nm.PLAN_PATH_TO_LOCATION + ' (users = %f)'%userdata.plan_path_to_location_counter_in)

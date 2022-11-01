@@ -8,7 +8,7 @@
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class represent the recharging state of the finite state machine. This state is executed every time the battery of the robot is low and the robot is located in the recharging room.
-In particular, in the robot is in a location and it can reach the recharging room then the FSM enters in this state, brings the robot to the recharging room and then recharges it.
+In particular, if the robot is in a location and it can reach the recharging room then the FSM enters in this state, brings the robot to the recharging room and then recharges it.
 If the robot is in a location and it cannot reach the recharging room this state is not executed because the robot could not physically enter in the rechargin location.
 At the end if the robot is already in the recharging location then the recharging state just recharges the robot and returns an execute action that allows the program know the robot can start again moving randonmly.
 The recharging method takes more or less 5 seconds to recharge the robot completely to 100% before let it go away again.
@@ -18,7 +18,9 @@ The clients are taken from the helper object initialized in the state.
 
 Clients:
 	:attr:`client`: aRMOR client used to update the timestamp of the robot and of the location the robot has just visited
+	
 	:attr:`planner_client`: client from which it is taken the goal, which means the path just computed to be passed to the controller.
+	
 	:attr:`controller_client`: client that makes the request to the respective server to move the robot through the path from the starting to the end position.
 """
 
@@ -92,7 +94,7 @@ class Recharge(smach.State):
 			none
 			
 		Returns:
-			location(String): actual location of the robot
+			_location(String): actual location of the robot
 		"""
 		return self._helper.format(self._helper.client.query.objectprop_b2_ind('isIn','Robot1'), '#', '>')[0]
 
@@ -131,7 +133,7 @@ class Recharge(smach.State):
 
 	def _recharging_method(self):
 		"""
-		Private function that performs the recharging on the robot if and only if when it is located in the recharging room.
+		Private function that performs the recharging on the robot if and only if it is located in the recharging room.
 		
 		Args:
 			none
@@ -146,10 +148,13 @@ class Recharge(smach.State):
 		for i in range(100):
 			if i % 5 == 0:
 				_battery.append('#')
+			# print red battery
 			if i <= 20:
 				print("[\033[1;31;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;31;49m" + str(i) + "\033[0m %", end="\r")
+			# print yellow battery
 			elif 20 < i <= 70:
 				print("[\033[1;33;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;33;49m" + str(i) + "\033[0m %", end="\r")
+			# print green battery
 			elif i > 70:
 				print("[\033[1;32;49m" + ''.join(_battery) + "\033[0m] | Battery: \033[1;32;49m" + str(i) + "\033[0m %", end="\r")
 			rospy.sleep(0.05)

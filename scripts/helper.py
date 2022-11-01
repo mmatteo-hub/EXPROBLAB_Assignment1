@@ -7,12 +7,12 @@
 
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
-This class implements an helper member that can be usde in the program it is included into to simplify the use of the code.
-In particular this helper provides all the action clients used and needed to control the robot plus other functions used to retrieve informations from the data/queries acquired.
+This class implements an helper member that can be used in the program it is included into to simplify the code.
+In particular this helper provides all the action clients used and needed to control the robot plus other functions used to retrieve information from the data and queries acquired.
+It is a way to avoid the use of many global variables that could lead to some problems in the code and it also allows an easier re-use of the code.
 
 Clients:
-	:attr:`armor_client`: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retireve information about the robot position
-	and its possibility to reach a particular location.
+	:attr:`armor_client`: client to communicate with the aRMOR server. It provides the possibility to create, load, modify and save an ontology. Moreover, it is used to retrieve information about the robot position and its possibility to reach a particular location.
 	
 	:attr:`motion_planner`: client to communicate with the planner server. This client is used to give the sever a start an a target position and the server provides a plan of points that the robot will have to follow.
 	
@@ -68,7 +68,7 @@ class Helper:
 	def reason_changes(self):
 		"""
 		Function to apply the modifications to the ontology.
-		it uses the aRMOR client to do thi and it is called every time the program changes something related to the ontology entities (timestamps, robot position etc ...)
+		It uses the aRMOR client to do this and it is called every time the program changes something related to the ontology entities (timestamps, robot position etc ...)
 		
 		Args:
 			none
@@ -82,7 +82,8 @@ class Helper:
 	def check_battery(self):
 		"""
 		Function to check the threshold to rise the battery low process.
-		This function checks the difference between the actual time and the last time the battery has been recharged and if it has passed too much time it changes the value of the sahred variable
+		This function checks the difference between the actual time and the last time the battery has been recharged and if it has passed too much time it changes the value of the shared variable.
+		This changes is read by the states of the finite state machine and so the SMACH machine can adapt its behaviour to deal with this event.
 		
 		Args:
 			none
@@ -98,12 +99,13 @@ class Helper:
 	def format(self, oldlist, start, end):
 		"""
 		Function to format a list of strings.
-		It cuts each element of oldlist between the strings start and end, returning the formatted list.
+		For all the elements in the list, it takes two character, a start and a finish one. In each element i-th it is looked for these two characters and it is taken just the portion of the string between them.
+		The return is a new list with the elements "cleaned" by not useful characters.
 		
 		Args:
 			oldlist(List): the list that has to be re-written in a better way
-			start(Char): the start character for the list memebr cut
-			end(Char): the end characted for the list memebr cut
+			start(Char): the start character for the list member cut
+			end(Char): the end characted for the list memeber cut
 		
 		Returns:
 			newList(List): the new list with all the elements written in a proper way
@@ -115,14 +117,14 @@ class Helper:
 
 	def plan_location(self, location):
 		"""
-		It returns the goal formatted as the start and target position.
-		It uses some private methods to compute the actual robot pos and the target goal for the robot.
+		It returns the client goal formatted as the start and target position.
+		It uses some private methods to compute the actual robot position and the target goal for the robot.
 		
 		Args:
 			location(String): location to which the robot has to arrive
 		
 		Returns:
-			goal(PlanGoal): the goal composed as two Points (start and target)
+			goal(PlanGoal): the goal composed as two Points (start and target both with x and y coordinates)
 		"""
 		goal = PlanGoal()
 		goal.start = self._robot_pos()
@@ -133,11 +135,12 @@ class Helper:
 		"""
 		Private function that checks and returns the actual robot position thanks to a query to the aRMOR server.
 		The function returns a type Point with its x and y parameters.
+		
 		Args:
 			none
 		
 		Returns:
-			position(Point): actual position of the robot casted as a Point with x and y
+			position(Point): actual position of the robot casted as a Point with x and y coordinates
 		"""
 		_pos = self.format(self.client.query.objectprop_b2_ind('isIn','Robot1'), '#', '>')[0]
 		for i in range(len(nm.ROOMS)):
@@ -147,7 +150,8 @@ class Helper:
 	def _target_coordiantes(self, _location):
 		"""
 		Function to retrieve the room coordinates (x and y) from its name.
-		The function works with the help of the :mod:`name_mapper.py` file that stores both the name and the corresponding coordinates for each location in the ontology.
+		The function works with the help of the :mod:`name_mapper` file that stores both the name and the corresponding coordinates for each location in the ontology.
+		In this file there are two list with a one to one correspondence between the name and the coordinates location.
 		
 		Args:
 			_location(String): string containing the name of the location
@@ -168,31 +172,31 @@ class Helper:
 			none
 			
 		Returns:
-			timestamp(String): timestamp of the robot casted as a string
+			_timestamp(String): timestamp of the robot casted as a string
 		"""
-		timestamp = self.client.query.dataprop_b2_ind('now', 'Robot1')
-		return str(self.format(timestamp, '"', '"')[0])
+		_timestamp = self.client.query.dataprop_b2_ind('now', 'Robot1')
+		return str(self.format(_timestamp, '"', '"')[0])
 				
-	def _location_old_timestamp(self, location):
+	def _location_old_timestamp(self, _location):
 		"""
 		Function to retrieve the timestamp of the lcoation.
 		It is used the aRMOR server with a query and the timestamp is returned as output.
-		The output represents the last time the location was visited by the robot
+		The output represents the last time the location was visited by the robot.
 		
 		Args:
-			location(String): name of the location the timestamp is required for
+			_location(String): name of the location the timestamp is required for
 			
 		Returns:
-			timestamp(String): timestamp of the location casted as a string
+			_timestamp(String): timestamp of the location casted as a string
 		"""
-		timestamp = self.client.query.dataprop_b2_ind('visitedAt', location)
-		return str(self.format(timestamp, '"', '"')[0])
+		_timestamp = self.client.query.dataprop_b2_ind('visitedAt', _location)
+		return str(self.format(_timestamp, '"', '"')[0])
 
 	def update_timestamp(self):
 		"""
 		Function to update the timestamp of an entity in the ontology.
 		It is replaced the timestamp of the robot with the acutal time.
-		This timestamp is then used in the replace of the location the robot is in the moment (the actual robot timestamp is now taken from the private method since it has just been updated)
+		This timestamp is then used to replace the location timestamp to set where the robot is at the actual time (the actual robot timestamp is now taken from the private method since it has just been updated)
 		
 		Args:
 			none

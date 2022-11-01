@@ -8,16 +8,16 @@
 .. moduleauthor:: Matteo Maragliano 4636216@studenti.unitge.it
 
 This class is used to reason the changes in the program execution.
-The changes inclused:
+The changes included are:
 
-* robot position in the environment built;
+* actual robot position in the environment built;
 * the choice of the next reachable location the robot will have to reach.
 
 All these are computed thanks to the use of the Helper object and few private functions.
-The important thing the reasoner has to take into account is the hierarchy among the locations that it has to choose, in particular:
+The important thing the reasoner has to take into account is the hierarchy among the locations that it has to choose among, in particular:
 
 * the robot should stay mainly in the corridors;
-* as soon as a room becomes urgent the robot has to visit it, if it is reachable by the robot;
+* as soon as a room becomes urgent the robot has to visit it, if it is reachable by the actual robot position;
 * the robot has to go to recharge itself in the proper recharging room as soon as the battery is low and the robot can reach that specific location.
 
 For this purpose the recharging room is set as the most urgent among the other as soon as the battery is low so that it has the priority for the robot as soon as it is reachable by it.
@@ -43,7 +43,7 @@ class Reasoner(smach.State):
 		It is used also the helper object imported from the Helper class to use the shared variables and the mutex.
 		
 		Args:
-			helper(Helper): object that helps the sharing of information relating the shared variables and the mutex among the states of the machine
+			helper(Helper): object that helps the sharing of information relating the shared variables and the use of mutex among the states of the machine
 		
 		Returns:
 			none
