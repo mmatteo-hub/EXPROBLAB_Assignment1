@@ -21,7 +21,7 @@ This structure can be seen by the following image:
 <img 
     src="/images/less_depth.jpg" 
     title="Less Depth in the FSM"
-    width="25%" height="25%">
+    width="50%" height="50%">
 
 However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
 * Plan Path To Location State;
@@ -32,7 +32,7 @@ These two states can be more clearly seen in the following figure:
 <img 
     src="/images/more_depth.jpg" 
     title="More Depth in the FSM"
-    width="25%" height="25%">
+    width="50%" height="50%">
 
 The program starts in the _Init State_ which initializes the ontology (the environmemt). Then this state is no longer executed. The program passes to the _Reasoner State_ which reasons the changes:
 * the actual robot position;
