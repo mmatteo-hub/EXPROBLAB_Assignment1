@@ -66,7 +66,9 @@ class PlanPathToLocation(smach.State):
 		_goal = self._helper.plan_location(self._helper.choice)
 		# gives the client the goal to allow the server computing the path
 		self._helper.planner_client.send_goal(_goal)
+		# waiting the client to finish the computation
 		self._helper.planner_client.wait_for_result()
+		
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
 			try:
