@@ -68,7 +68,7 @@ class GoToLocationToVisit(smach.State):
 		
 		# send the goal to the controller client
 		self._helper.controller_client.send_goal(self._helper.planner_client.get_result())
-		
+		self._helper.planner_client.wait_for_result()
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
 			try:
