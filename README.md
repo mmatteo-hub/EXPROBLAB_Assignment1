@@ -34,6 +34,13 @@ These two states can be more clearly seen in the following figure:
     title="More Depth in the FSM"
     width="50%" height="50%">
 
+A more clear graph is presented here:
+
+<img
+    src="/images/FSM.jpg"
+    title="FSM"
+    width="50%" height="50%">
+
 The program starts in the _Init State_ which initializes the ontology (the environmemt). Then this state is no longer executed. The program passes to the _Reasoner State_ which reasons the changes:
 * the actual robot position;
 * the timestamps representing the last time a location has been visited by the robot.
