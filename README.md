@@ -16,30 +16,26 @@ The main software, the one of the Finite State Machine is composed of four state
 * _Move Random State_;
 * _Recharge State_.
 
-This structure can be seen by the following image:
+This structure can be seen by the following images:
 
 <img 
-    src="/images/less_depth.jpg" 
+    src="/images/less_depth.jpg"
     title="Less Depth in the FSM"
+    width="50%" height="50%"><img 
+    src="/images/more_depth.jpg" 
+    title="More Depth in the FSM"
     width="50%" height="50%">
 
 However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
 * Plan Path To Location State;
 * Go To Location To Visit State.
 
-These two states can be more clearly seen in the following figure:
-
-<img 
-    src="/images/more_depth.jpg" 
-    title="More Depth in the FSM"
-    width="50%" height="50%">
-
-A more clear graph is presented here:
+The graph above are taken from the automatic SMACH viewer and they could be a little bit confusing. In order to evaluate the entire graph correctly and see it clearly we provided one by drawing it and highlighting the transition in a better way. This graph can be seen in the following image:
 
 <img
     src="/images/FSM.jpg"
     title="FSM"
-    width="50%" height="50%">
+    width="60%" height="60%">
 
 The program starts in the _Init State_ which initializes the ontology (the environmemt). Then this state is no longer executed. The program passes to the _Reasoner State_ which reasons the changes:
 * the actual robot position;
