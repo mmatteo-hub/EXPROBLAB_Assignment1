@@ -37,6 +37,29 @@ The graph above are taken from the automatic SMACH viewer and they could be a li
     title="FSM"
     width="60%" height="60%">
 
+### Software components
+It follows the details of the software components used in the program, which are available in the `scripts` folder.
+
+#### The `planner` Node
+<img
+	src="images/planner.jpg"
+	title="planner node"
+	width="50%" height="50%">
+	
+The `planner` node implements an action server called `motion/planner`. This is done by the means of the `SimpleActionServer` class based on the `Plan` action message. This action server requires a `start` and a `target` position passed as two fields of the goal. <br>
+Given the goal parameters this component return a plan as a list of `via_points`, which are computed by spacing linearly the distance between the two _x_ and _y_ coordinates of the points. The number of `via_points` can be modified thanks to the parameter in the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file. <br>
+When a new `via_points` is generated, the updated plan is provided as `feedback`. When all the `via_points` have been generated, the plan is provided as `results``.
+
+#### The `controller` Node
+<img
+	src="images/controller.jpg"
+	title="controller node"
+	width="50%" height="50%">
+	
+The `controller` node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.`<br>
+Given the plan the `controller` iterates for each planned `via_points` and waits to simulate the time spent to move the robot. <br>
+Each time a `via_point` is reached the a `feedback` is provided. When the last `via_point` is reached, the action service provides a `result` by propagating the current robot position.
+
 The program starts in the _Init State_ which initializes the ontology (the environmemt). Then this state is no longer executed. The program passes to the _Reasoner State_ which reasons the changes:
 * the actual robot position;
 * the timestamps representing the last time a location has been visited by the robot.
