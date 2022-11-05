@@ -56,7 +56,7 @@ When a new `via_points` is generated, the updated plan is provided as `feedback`
 	title="controller node"
 	width="50%" height="50%">
 	
-The `controller` node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.`<br>
+The `controller` node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.<br>
 Given the plan the `controller` iterates for each planned `via_points` and waits to simulate the time spent to move the robot. <br>
 Each time a `via_point` is reached the a `feedback` is provided. When the last `via_point` is reached, the action service provides a `result` by propagating the current robot position.
 
