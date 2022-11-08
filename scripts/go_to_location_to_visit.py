@@ -69,7 +69,7 @@ class GoToLocationToVisit(smach.State):
 		# send the goal to the controller client
 		self._helper.controller_client.send_goal(self._helper.planner_client.get_result())
 		# waiting the client to finish the computation
-		self._helper.planner_client.wait_for_result()
+		self._helper.controller_client.wait_for_result()
 		
 		while not rospy.is_shutdown():
 			self._helper.mutex.acquire()
@@ -80,14 +80,15 @@ class GoToLocationToVisit(smach.State):
 				if self._helper.planner_client.get_state() == GoalStatus.SUCCEEDED:
 					self._helper.client.manipulation.replace_objectprop_b2_ind('isIn', 'Robot1', str(self._helper.choice), str(self._helper.old_loc))
 					
-					log_msg = f'Moving the robot from \033[0;35;49m' + str(self._helper.old_loc) + '\033[0m to \033[0;36;49m' + str(self._helper.choice) + '\033[0m'
+					log_msg = f'Moved the robot from \033[0;35;49m' + str(self._helper.old_loc) + '\033[0m to \033[0;36;49m' + str(self._helper.choice) + '\033[0m'
 					rospy.loginfo(nm.tag_log(log_msg, nm.GO_TO_LOCATION_TO_VISIT))
 					
 					self._helper.update_timestamp()
 					
-					log_msg = f'Doing something in the location \033[0;36;49m' + str(self._helper.choice) + '\033[0m'
-					rospy.loginfo(nm.tag_log(log_msg, nm.GO_TO_LOCATION_TO_VISIT))
-					rospy.sleep(nm.BUSY_PARAMETER)
+					if(self._helper.controller_client.get_state() == GoalStatus.SUCCEEDED):
+						log_msg = f'Doing something in the location \033[0;36;49m' + str(self._helper.choice) + '\033[0m'
+						rospy.loginfo(nm.tag_log(log_msg, nm.GO_TO_LOCATION_TO_VISIT))
+						rospy.sleep(nm.BUSY_PARAMETER)
 					
 					# if the reasoner is checking for the recharging room but it cannot reach it directly because in a location no directly connected to the recharging one,
 					# then it move the robot into another location and try to reach the recharging room from this new one
