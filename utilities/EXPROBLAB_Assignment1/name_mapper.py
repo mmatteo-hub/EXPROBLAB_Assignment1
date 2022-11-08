@@ -37,7 +37,7 @@ NODE_ROBOT_STATE = 'robot-state'
 # Parameter for the battery threshold (when it gets low) in seconds
 BATTERY_THRESHOLD = 60 #[s]
 # Parameter to simulate the busy waiting of the robot in a specific location (in seconds)
-BUSY_PARAMETER = 3 #[s]
+BUSY_PARAMETER = 5 #[s]
 # Parameter to know the number of points needed in the path
 NUMBER_OF_POINTS_PATH = 10
 # Parameter to indicate the name of the recharging room
