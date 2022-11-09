@@ -11,14 +11,14 @@ The entities that connect two locations are called _doors_ and the entity that m
 
 ## Software Architecture
 The main software, the one of the Finite State Machine is composed of four states:
-* _Init State_;
-* _Reasoner State_;
+* [_Init State_](scripts/init_state.py);
+* [_Reasoner State_](scripts/reasoner.py);
 * _Move Random State_;
-* _Recharge State_.
+* [_Recharge State_](scripts/recharge.py).
 
 This structure can be seen by the following images:
 
-<img 
+<img
     src="/images/less_depth.jpg"
     title="Less Depth in the FSM"
     width="50%" height="50%"><img 
@@ -27,8 +27,8 @@ This structure can be seen by the following images:
     width="50%" height="50%">
 
 However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
-* Plan Path To Location State;
-* Go To Location To Visit State.
+* [Plan Path To Location State](scripts/plan_path_to_location.py);
+* [Go To Location To Visit State](scripts/go_to_location_to_visit.py).
 
 The graph above are taken from the automatic SMACH viewer and they could be a little bit confusing. In order to evaluate the entire graph correctly and see it clearly we provided one by drawing it and highlighting the transition in a better way. This graph can be seen in the following image:
 
@@ -38,7 +38,7 @@ The graph above are taken from the automatic SMACH viewer and they could be a li
     width="60%" height="60%">
 
 ### Software components
-It follows the details of the software components used in the program, which are available in the `scripts` folder.
+It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
 
 #### The `planner` Node
 <img
@@ -46,9 +46,9 @@ It follows the details of the software components used in the program, which are
 	title="planner node"
 	width="60%" height="60%">
 	
-The `planner` node implements an action server called `motion/planner`. This is done by the means of the `SimpleActionServer` class based on the `Plan` action message. This action server requires a `start` and a `target` position passed as two fields of the goal. <br>
+The [`planner`](scripts/planner.py) node implements an action server called `motion/planner`. This is done by the means of the `SimpleActionServer` class based on the `Plan` action message. This action server requires a `start` and a `target` position passed as two fields of the goal. <br>
 Given the goal parameters this component return a plan as a list of `via_points`, which are computed by spacing linearly the distance between the two _x_ and _y_ coordinates of the points. The number of `via_points` can be modified thanks to the parameter in the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file. <br>
-When a new `via_points` is generated, the updated plan is provided as `feedback`. When all the `via_points` have been generated, the plan is provided as `results``.
+When a new `via_points` is generated, the updated plan is provided as `feedback`. When all the `via_points` have been generated, the plan is provided as `results`.
 
 #### The `controller` Node
 <img
@@ -56,7 +56,7 @@ When a new `via_points` is generated, the updated plan is provided as `feedback`
 	title="controller node"
 	width="60%" height="60%">
 	
-The `controller` node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.<br>
+The [`controller`](scripts/controller.py) node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.<br>
 Given the plan the `controller` iterates for each planned `via_points` and waits to simulate the time spent to move the robot. <br>
 Each time a `via_point` is reached the a `feedback` is provided. When the last `via_point` is reached, the action service provides a `result` by propagating the current robot position.
 
@@ -74,7 +74,7 @@ The code is also composed of an _Helper_ which is a class containing all the sha
 
 ## Installation and Running Procedure
 ### Run by `roslaunch` file
-In order to run the program by the `roslaunch` file we first need to install the `xterm` tool by following these steps:
+In order to run the program by the [`roslaunch`](launch/assignment.launch) file we first need to install the `xterm` tool by following these steps:
 ```bash
 sudo apt-get update
 sudo apt-get -y install xterm
@@ -129,27 +129,29 @@ The normal autonomy of the battery is set to one minute of program execution, af
 ### Environment
 The ontology that we initialized in this assignment is the following:
 
-<img 
+<img
     src="/images/map.jpg" 
     title="Ontology Map"
     width="25%" height="25%">
 
 The environment used and initialized is supposed to be consinstent with the real one, so that the reasoner can alsways find a consinstent ontology to work on. <br>
 Moreover, it is also assumed that all corridors, _E_, _C1_ and _C2_ are connected together. In this way the robot is able to perform its _surveillance policy_ correctly. <br>
-Also for more difficult environment, so for bigger ontologies it is assumed that all the corridors are connected together and at least with the _recharging location_.
+Also for more difficult environment, so for bigger ontologies it is assumed that all the corridors are connected together and at least with the _recharging location_. <br>
+It was also assumed that each location is associated to a spicific coordinate point composed of _x_ and _y_ value. These are the values that are used in the `planner` to compute the path. The values of the coordinates are taken from the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file.
 
 ### Robot
 The robot starts in the _Recharging Room_ which is in this case the _E_ one. From here it move randomly, which means that it checks the reachable location from its actual one and then chooses randomly among the list of possibilities. <br>
 The robot is also assumed to have an autonomy of 60 seconds, after which it needs to be recharged. It is assumed that the robot needs to reach the proper location before being recharged and also this reaching transition is performed randomly at the beginning when the robot cannot reach the recharging location; as soon as it has the possibility to reach it, then the choice is imposed to this one.
 
 ### System Features
-In order to build the system it was opted to build a robust code. In fact, when the robot has a low battery level its only goal is to reach the _E_ room: as it was more than an _urgent_ location. This means that the robot could move around for a high amount of time if it did not detect the recharing room immediately, but this behaviour would not affect the surveillance problem of the robot.
+In order to build the system it was opted to build a robust code. In fact, when the robot has a low battery level its only goal is to reach the _E_ room: as it was more than an _urgent_ location. This means that the robot could move around for a high amount of time if it did not detect the recharing room immediately, but this behaviour would not affect neither the surveillance problem of the robot nor the physical constraints: the robot could not be teletransported from a room to another so need to have the physical possibility to reach that new location.
 
 ### System Limitation
-One of the possible limitation of the code is the possibility of having the robot moving randomly for a long time before reaching the recharging room when needed which could be tricky from a physical point of view since the robot could not have all that amount of battery left.
+One of the possible limitation of the code is the possibility of having the robot moving randomly for a long time before reaching the recharging room when needed which could be tricky from a physical point of view since the robot could not have all that amount of battery left. Howeverm this approach is preferred with respect to another one since it is robuster and respects the physics behind the robot movement.
 
 ### Possible technical improvements
-A possible improvement could be the possibility to make the robot remember a path from each location to the recharging room so that in case of low battery it can reach the location without having to choose randomly and thus reducing the time wasting due to the random choice.
+A possible improvement could be the possibility to make the robot remember a path from each location to the recharging room so that in case of low battery it can reach the location without having to choose randomly and thus reducing the time wasting due to the random choice. <br>
+Moreover, if the robot had to compute the path it would have to compute it by checking all the possible paths and take the most optimal one thus avoiding loosing time with not useful movements and not have to waste important battery.
 
 ## Authors and Contacts
 [Matteo Maragliano](https://github.com/mmatteo-hub) (S4636216) <br>
