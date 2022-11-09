@@ -112,7 +112,8 @@ It shows us which state the FSM is into, what it is doing into ithe state and th
 * bottom-left: it is the planner server that computes the path from the start postion to the target one and publish the result;
 * bottom-right: it is the controller server that simualtes the movement of the robot by changing its position through the points of the path.
 
-![video](https://user-images.githubusercontent.com/62358773/200966819-215838eb-94fa-47da-9944-32a71addd377.gif)
+Here there is the gif:
+![video](https://user-images.githubusercontent.com/62358773/200967281-06001cc6-49ba-49bc-a8af-bb7c9ebcf339.gif)
 
 The video begins with the starting of all the points, then the FSM enters in the _PlanPathToPostion_ so the planner publishes the result. Then it goes in the _GoToLocationToVisit_ state and controller server moves the robot. In the new location the robot waits for some instants, defined as a parameter in the  file as 5 seconds, and then the FSM reasons the changes in the ontology through the `reasoner` state: where it is and which lcoation it can now reach. <br>
 After that, it plans again and starts moving randomly again. <br>
