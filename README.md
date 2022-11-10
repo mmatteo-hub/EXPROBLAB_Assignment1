@@ -1,6 +1,6 @@
 # EXPROBLAB_Assignment1
 
-## Introduction
+## <img src="https://user-images.githubusercontent.com/62358773/201054267-813527ff-db10-4746-98d2-b590956c9d9e.png" width="5%" height="5%"> Introduction
 The assignment is the realization of an algorithm to make the robot move in an environment and have a surveillance behaviour to choose the way to move. The invironment is composed of locations that are connected in a certain way depending on the choice of the user.
 The goal is to build a Finite State Machine (FSM) that allows the robot to choose the behaviour to adopt depending on the situation. The robot is also provided a battery, periodically checked, that needs to be recharged after some time of using. <br>
 The locations are divided into:
@@ -9,7 +9,7 @@ The locations are divided into:
 
 The entities that connect two locations are called _doors_ and the entity that moves in the environment is the robot, called _Robot1_.
 
-## Folder organization
+## <img src="https://user-images.githubusercontent.com/62358773/158230379-3c1a609e-e437-4c90-9f94-90f70d162e8a.png" width="5%" height="5%"> Folder organization
 This repository contains a ROS package named `EXPROBLAB_Assignment1` that includes the following resources.
  - [CMakeLists.txt](CMakeLists.txt): File to configure this package.
  - [package.xml](package.xml): File to configure this package.
@@ -43,7 +43,7 @@ This repository contains a ROS package named `EXPROBLAB_Assignment1` that includ
     - [topological_map.owl](topology/topological_map.owl): topological map from which the environment is built.
  - [images/](images/): It contains the diagrams and images shown in this README file.
 
-## Software Architecture
+## <img src="https://user-images.githubusercontent.com/62358773/201227801-2cb5dbcf-1956-4c4f-8d0d-15aab1381ebb.png" width="4%" height="4%"> Software Architecture
 The main software, the one of the Finite State Machine is composed of four states:
 * [_Init State_](scripts/init_state.py);
 * [_Reasoner State_](scripts/reasoner.py);
@@ -78,7 +78,7 @@ The hand-drawn graph can be seen in the following image:
 
 Here all the transitions can be clearly read and it is highlighted also the sub finite state machine used with the two inner states in details.
 
-### Software components
+### <img src="https://user-images.githubusercontent.com/62358773/201228015-2f81ca3e-9471-4188-9e18-f683c94ef68d.png" width="3%" height="3%"> Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
 
 #### The `planner` Node
@@ -123,7 +123,7 @@ In teh figure above there is the presentation of how the components used in the 
 * _planner_: it is responsible of computing the path and communicates through the _Plan Action_ sent. It returns a plan which is the result of the server.
 * _controller_: it is responsible of moving the robot along the path and communicates through the _Control Action_ sent. It updates the actual position of the robot through the via points thanks to the server result.
 
-## Installation and Running Procedure
+## <img src="https://user-images.githubusercontent.com/62358773/175919787-96dfd662-af73-4ab6-a6ad-e7049ff1336e.png" width="5%" height="5%"> Installation and Running Procedure
 ### Run by `roslaunch` file
 In order to run the program by the [`roslaunch`](launch/assignment.launch) file we first need to install the `xterm` tool by following these steps:
 ```bash
@@ -154,7 +154,7 @@ rosrun EXPROBLAB_Assignment1 controller.py
 rosrun EXPROBLAB_Assignment1 fsm.py
 ```
 
-## Video
+## <img src="https://user-images.githubusercontent.com/62358773/201228240-30be2acd-4ca6-4831-941c-3621f3f7ce81.png" width="5%" height="5%">  Video
 The video below represents a part of the program during its normal execution.
 As the video starts there are four sections in the window:
 * top-left: it is the aRMOR Server window and it is used to make the query and communicate with the FSM program;
@@ -181,7 +181,7 @@ The FSM is then brought to execute the _Recharge_ state, so the robot is firstly
 Just as a video demonstration the battery is set to need a recharge after 15 seconds of execution so that the user can see how the robot behaves in case of battery low. <br>
 The normal autonomy of the battery is set to one minute of program execution, after which the robot has to recharge to go on with its surveillance behaviour.
 
-## Working Hypothesis and Environment
+## <img src="https://user-images.githubusercontent.com/62358773/201228374-1f7fb218-179a-4c6b-930a-f13dcbc07bb5.png" width="5%" height="5%"> Working Hypothesis and Environment
 ### Environment
 The ontology that we initialized in this assignment is the following:
 
@@ -212,6 +212,6 @@ One of the possible limitation of the code is the possibility of having the robo
 A possible improvement could be the possibility to make the robot remember a path from each location to the recharging room so that in case of low battery it can reach the location without having to choose randomly and thus reducing the time wasting due to the random choice. <br>
 Moreover, if the robot had to compute the path it would have to compute it by checking all the possible paths and take the most optimal one thus avoiding loosing time with not useful movements and not have to waste important battery.
 
-## Authors and Contacts
+## <img src="https://user-images.githubusercontent.com/62358773/158238810-c5dcb486-ba24-4b35-87de-39a54e88f36b.png" width="5%" height="5%"> Authors and Contacts
 [Matteo Maragliano](https://github.com/mmatteo-hub) (S4636216) <br>
 [S4636216@studenti.unige.it](mailto:S4636216@studenti.unige.it)
