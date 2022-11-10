@@ -9,6 +9,39 @@ The locations are divided into:
 
 The entities that connect two locations are called _doors_ and the entity that moves in the environment is the robot, called _Robot1_.
 
+## Folder organization
+This repository contains a ROS package named `EXPROBLAB_Assignment1` that includes the following resources.
+ - [CMakeList.txt](CMakeList.txt): File to configure this package.
+ - [package.xml](package.xml): File to configure this package.
+ - [setup.py](setup.py): File to `import` python modules from the `utilities` folder into the 
+   files in the `script` folder. 
+ - [launch/](launch/): Contains the configuration to launch this package.
+    - [assignment.launch](/launch/assignment.launch)
+ - [msg/](msg/): It contains the message exchanged through ROS topics.
+    - [Point.msg](msg/Point.msg): It is the message representing a 2D point.
+ - [action/](action/): It contains the definition of each action server used by this software.
+    - [Plan.action](action/Plan.action): It defines the goal, feedback and results concerning 
+      motion planning.
+    - [Control.action](action/Control.action): It defines the goal, feedback and results 
+      concerning motion controlling.
+ - [scripts/](scripts/): It contains the implementation of each software components.
+    - [speech.py](scripts/speech.py): It is a dummy implementation of the speech-based 
+      commands detection algorithm.
+    - [gesture.py](scripts/gesture.py): It is a dummy implementation of the gesture-based
+      commands detection algorithm.
+    - [robot_state.py](scripts/robot_state.py): It implements the robot state including:
+      current position, and battery level.
+    - [planner.py](scripts/planner.py): It is a dummy implementation of a motion planner.
+    - [controller.py](scripts/controller.py): It is a dummy implementation of a motion 
+      controller.
+ - [utilities/EXPROBLAB_Assignment1/](utilities/EXPROBLAB_Assignment1/): It contains auxiliary python files, 
+   which are exploited by the files in the `scripts` folder.
+    - [name_mapper.py](scripts/name_mapper.py): It contains the name
+      of each *node*, *topic*, *server*, *actions* and *parameters* used in this architecture, if any.
+ - [docs](docs/): It contains the _HTML_ documentation of the package.
+ - [topology](/topology): It contains the starting ontology used in the package which is modified in the initial state to build the new environment for the assignment.
+ - [images/](images/): It contains the diagrams and images shown in this README file.
+
 ## Software Architecture
 The main software, the one of the Finite State Machine is composed of four states:
 * [_Init State_](scripts/init_state.py);
@@ -16,23 +49,33 @@ The main software, the one of the Finite State Machine is composed of four state
 * _Move Random State_;
 * [_Recharge State_](scripts/recharge.py).
 
-This structure can be seen by the following images:
+This structure can be seen by the following image:
 
 <img
     src="/images/fsm_smach.jpg"
-    title="Less Depth in the FSM"
-    width="50%" height="50%">
+    title="smach fsm"
+    width="75%" height="75%">
 
-However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
+Where the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
 * [Plan Path To Location State](scripts/plan_path_to_location.py);
 * [Go To Location To Visit State](scripts/go_to_location_to_visit.py).
 
-The graph above are taken from the automatic SMACH viewer it does not include all the transitions of the states (to make it more readable). In order to evaluate the entire graph correctly and see all the transitions clearly we provided one by drawing it and highlighting the transitions in a better way. This graph can be seen in the following image:
+The graph above is taken from the automatic SMACH viewer and by purpose it does not include all the transitions of the states (to make it more readable). In order to evaluate the entire graph correctly and see all the transitions clearly we provided one by drawing it and highlighting the transitions in a better way. <br>
+<br>
+In order to retrieve the automatic viewer from ros
+
+```bash
+rosrun smach_viewer smach_viewer.py
+```
+
+The hand-drawn graph can be seen in the following image:
 
 <img
     src="/images/FSM.jpg"
     title="FSM"
-    width="70%" height="70%">
+    width="75%" height="75%">
+
+Here all the transitions can be clearly read and it is highlighted also the sub finite state machine used with the two inner states in details.
 
 ### Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
@@ -41,7 +84,7 @@ It follows the details of the software components used in the program, which are
 <img
 	src="images/planner.jpg"
 	title="planner node"
-	width="60%" height="60%">
+	width="75%" height="75%">
 	
 The [`planner`](scripts/planner.py) node implements an action server called `motion/planner`. This is done by the means of the `SimpleActionServer` class based on the `Plan` action message. This action server requires a `start` and a `target` position passed as two fields of the goal. <br>
 Given the goal parameters this component return a plan as a list of `via_points`, which are computed by spacing linearly the distance between the two _x_ and _y_ coordinates of the points. The number of `via_points` can be modified thanks to the parameter in the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file. <br>
@@ -51,7 +94,7 @@ When a new `via_points` is generated, the updated plan is provided as `feedback`
 <img
 	src="images/controller.jpg"
 	title="controller node"
-	width="60%" height="60%">
+	width="75%" height="75%">
 	
 The [`controller`](scripts/controller.py) node implements an action server named `motion/controller`. This is done by the means of the `SimpleActionServer` class based on the `Control` action message. This action server requires the `plan` given as a list of `via_points` by the planner.<br>
 Given the plan the `controller` iterates for each planned `via_points` and waits to simulate the time spent to move the robot. <br>
@@ -134,7 +177,7 @@ The ontology that we initialized in this assignment is the following:
 <img
     src="/images/map.jpg" 
     title="Ontology Map"
-    width="25%" height="25%">
+    width="50%" height="50%">
 
 The environment used and initialized is supposed to be consinstent with the real one, so that the reasoner can alsways find a consinstent ontology to work on. <br>
 Moreover, it is also assumed that all corridors, _E_, _C1_ and _C2_ are connected together. In this way the robot is able to perform its _surveillance policy_ correctly. <br>
