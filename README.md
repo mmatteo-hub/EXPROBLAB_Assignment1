@@ -19,23 +19,20 @@ The main software, the one of the Finite State Machine is composed of four state
 This structure can be seen by the following images:
 
 <img
-    src="/images/less_depth.jpg"
+    src="/images/fsm_smach.jpg"
     title="Less Depth in the FSM"
-    width="50%" height="50%"><img 
-    src="/images/more_depth.jpg" 
-    title="More Depth in the FSM"
     width="50%" height="50%">
 
 However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
 * [Plan Path To Location State](scripts/plan_path_to_location.py);
 * [Go To Location To Visit State](scripts/go_to_location_to_visit.py).
 
-The graph above are taken from the automatic SMACH viewer and they could be a little bit confusing. In order to evaluate the entire graph correctly and see it clearly we provided one by drawing it and highlighting the transition in a better way. This graph can be seen in the following image:
+The graph above are taken from the automatic SMACH viewer it does not include all the transitions of the states (to make it more readable). In order to evaluate the entire graph correctly and see all the transitions clearly we provided one by drawing it and highlighting the transitions in a better way. This graph can be seen in the following image:
 
 <img
     src="/images/FSM.jpg"
     title="FSM"
-    width="60%" height="60%">
+    width="70%" height="70%">
 
 ### Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
