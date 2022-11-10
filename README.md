@@ -11,7 +11,7 @@ The entities that connect two locations are called _doors_ and the entity that m
 
 ## Folder organization
 This repository contains a ROS package named `EXPROBLAB_Assignment1` that includes the following resources.
- - [CMakeList.txt](CMakeList.txt): File to configure this package.
+ - [CMakeLists.txt](CMakeLists.txt): File to configure this package.
  - [package.xml](package.xml): File to configure this package.
  - [setup.py](setup.py): File to `import` python modules from the `utilities` folder into the 
    files in the `script` folder. 
@@ -38,8 +38,9 @@ This repository contains a ROS package named `EXPROBLAB_Assignment1` that includ
    which are exploited by the files in the `scripts` folder.
     - [name_mapper.py](utilities/EXPROBLAB_Assignment1//name_mapper.py): It contains the name
       of each *node*, *topic*, *server*, *actions* and *parameters* used in this architecture, if any.
- - [docs](docs/): It contains the _HTML_ documentation of the package.
- - [topology](/topology): It contains the starting ontology used in the package which is modified in the initial state to build the new environment for the assignment.
+ - [docs/](docs/): It contains the _HTML_ documentation of the package.
+ - [topology/](/topology): It contains the starting ontology used in the package which is modified in the initial state to build the new environment for the assignment.
+    - [topological_map.owl](topology/topological_map.owl): topological map from which the environment is built.
  - [images/](images/): It contains the diagrams and images shown in this README file.
 
 ## Software Architecture
