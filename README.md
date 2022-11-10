@@ -78,7 +78,7 @@ The hand-drawn graph can be seen in the following image:
 
 Here all the transitions can be clearly read and it is highlighted also the sub finite state machine used with the two inner states in details.
 
-### <img src="https://user-images.githubusercontent.com/62358773/201228015-2f81ca3e-9471-4188-9e18-f683c94ef68d.png" width="3%" height="3%"> Software components
+### <img src="https://user-images.githubusercontent.com/62358773/201228015-2f81ca3e-9471-4188-9e18-f683c94ef68d.png" width="4%" height="4%"> Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
 
 #### The `planner` Node
