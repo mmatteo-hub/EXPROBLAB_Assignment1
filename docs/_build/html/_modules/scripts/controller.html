@@ -37,8 +37,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">utilities</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -100,7 +104,7 @@
 
 
 <span class="c1"># An action server to simulate motion controlling.</span>
-<div class="viewcode-block" id="ControllingAction"><a class="viewcode-back" href="../../index.html#scripts.controller.ControllingAction">[docs]</a><span class="k">class</span> <span class="nc">ControllingAction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ControllingAction"><a class="viewcode-back" href="../../scripts.html#scripts.controller.ControllingAction">[docs]</a><span class="k">class</span> <span class="nc">ControllingAction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -123,7 +127,7 @@
                    <span class="sa">f</span><span class="s1">&#39;between each via point spanning in [</span><span class="si">{</span><span class="n">nm</span><span class="o">.</span><span class="n">NUMBER_OF_POINTS_PATH</span><span class="si">}</span><span class="s1">).&#39;</span><span class="p">)</span>
         <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">nm</span><span class="o">.</span><span class="n">tag_log</span><span class="p">(</span><span class="n">log_msg</span><span class="p">,</span> <span class="n">LOG_TAG</span><span class="p">))</span>
 
-<div class="viewcode-block" id="ControllingAction.execute_callback"><a class="viewcode-back" href="../../index.html#scripts.controller.ControllingAction.execute_callback">[docs]</a>    <span class="k">def</span> <span class="nf">execute_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
+<div class="viewcode-block" id="ControllingAction.execute_callback"><a class="viewcode-back" href="../../scripts.html#scripts.controller.ControllingAction.execute_callback">[docs]</a>    <span class="k">def</span> <span class="nf">execute_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function that is executed every time the machine needs to simulate the movement of the robot between two locations.</span>
 <span class="sd">        The callback is invoked when a client sets a goal to the :mod:`controller` server.</span>

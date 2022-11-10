@@ -57,7 +57,7 @@ class GoToLocationToVisit(smach.State):
 		It uses the mutex instantiated in the helper to manage the variable access.
 		
 		Args:
-			userdata:
+			userdata: pointer to pass the data among the states of a State Machine
 			
 		Returns:
 			transition(String): string containing the label of the action performed and used to change state in the sub machine and returning to the upper one.
