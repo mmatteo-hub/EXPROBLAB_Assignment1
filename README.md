@@ -19,23 +19,20 @@ The main software, the one of the Finite State Machine is composed of four state
 This structure can be seen by the following images:
 
 <img
-    src="/images/less_depth.jpg"
+    src="/images/fsm_smach.jpg"
     title="Less Depth in the FSM"
-    width="50%" height="50%"><img 
-    src="/images/more_depth.jpg" 
-    title="More Depth in the FSM"
     width="50%" height="50%">
 
 However, the _Move Random State_ represents a sub finite state machine, which means that it is composed in turn of other states, in particular:
 * [Plan Path To Location State](scripts/plan_path_to_location.py);
 * [Go To Location To Visit State](scripts/go_to_location_to_visit.py).
 
-The graph above are taken from the automatic SMACH viewer and they could be a little bit confusing. In order to evaluate the entire graph correctly and see it clearly we provided one by drawing it and highlighting the transition in a better way. This graph can be seen in the following image:
+The graph above are taken from the automatic SMACH viewer it does not include all the transitions of the states (to make it more readable). In order to evaluate the entire graph correctly and see all the transitions clearly we provided one by drawing it and highlighting the transitions in a better way. This graph can be seen in the following image:
 
 <img
     src="/images/FSM.jpg"
     title="FSM"
-    width="60%" height="60%">
+    width="70%" height="70%">
 
 ### Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
@@ -112,8 +109,13 @@ It shows us which state the FSM is into, what it is doing into ithe state and th
 * bottom-left: it is the planner server that computes the path from the start postion to the target one and publish the result;
 * bottom-right: it is the controller server that simualtes the movement of the robot by changing its position through the points of the path.
 
-The video begins with the starting of all the points, then the FSM enters in the _PlanPathToPostion_ so the planner publishes the result. Then it goes in the _GoToLocationToVisit_ state and controller server moves the robot. In the new location the robot waits for some instants, defined as a parameter, and then plan the reason the changes in the ontology: where it is and which lcoation it can now reach. <br>
-After that, it plans again and starts moving randomly again.
+Here there is the gif:
+![video](https://user-images.githubusercontent.com/62358773/200967281-06001cc6-49ba-49bc-a8af-bb7c9ebcf339.gif)
+
+The video begins with the starting of all the points, then the FSM enters in the _PlanPathToPostion_ so the planner publishes the result. Then it goes in the _GoToLocationToVisit_ state and controller server moves the robot. In the new location the robot waits for some instants, defined as a parameter in the  file as 5 seconds, and then the FSM reasons the changes in the ontology through the `reasoner` state: where it is and which lcoation it can now reach. <br>
+After that, it plans again and starts moving randomly again. <br>
+The robot has also to reach some urgent locations that in the video are the possible rooms _Rn_ that are shown as destination while it is in the corridors. Once visited the robot return to the corridor and goes on with its behaviour. <br>
+Just as a video simulation, the autonomy of the battery is set to 15 seconds and the urgent parameter for the location to 5 seconds.
 
 #### Surveillance Policy adopted
 When the robot’s battery is not low, it should move among locations with this policy: 
@@ -137,11 +139,14 @@ The ontology that we initialized in this assignment is the following:
 The environment used and initialized is supposed to be consinstent with the real one, so that the reasoner can alsways find a consinstent ontology to work on. <br>
 Moreover, it is also assumed that all corridors, _E_, _C1_ and _C2_ are connected together. In this way the robot is able to perform its _surveillance policy_ correctly. <br>
 Also for more difficult environment, so for bigger ontologies it is assumed that all the corridors are connected together and at least with the _recharging location_. <br>
-It was also assumed that each location is associated to a spicific coordinate point composed of _x_ and _y_ value. These are the values that are used in the `planner` to compute the path. The values of the coordinates are taken from the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file.
+It was also assumed that each location is associated to a spicific coordinate point composed of _x_ and _y_ value. These are the values that are used in the `planner` to compute the path. The values of the coordinates are taken from the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file. <br>
+<br>
+The _urgent_ parameter that allows the location to have the priority to be visited is set to 15 seconds. All the location that have not been visited for more than 15 seconds become urgent and have the priority. Of course, if the robot has not enough battery the priority is taken by the recharging room _E_ that is the one to be reached as soon as possible.
 
 ### Robot
 The robot starts in the _Recharging Room_ which is in this case the _E_ one. From here it move randomly, which means that it checks the reachable location from its actual one and then chooses randomly among the list of possibilities. <br>
-The robot is also assumed to have an autonomy of 60 seconds, after which it needs to be recharged. It is assumed that the robot needs to reach the proper location before being recharged and also this reaching transition is performed randomly at the beginning when the robot cannot reach the recharging location; as soon as it has the possibility to reach it, then the choice is imposed to this one.
+The robot is also assumed to have an autonomy of 60 seconds, after which it needs to be recharged. It is assumed that the robot needs to reach the proper location before being recharged and also this reaching transition is performed randomly at the beginning when the robot cannot reach the recharging location; as soon as it has the possibility to reach it, then the choice is imposed to this one. <br>
+The robot has an autonomy battery of 60 seconds after which it has to be recharged before continuing with its normal behaviour.
 
 ### System Features
 In order to build the system it was opted to build a robust code. In fact, when the robot has a low battery level its only goal is to reach the _E_ room: as it was more than an _urgent_ location. This means that the robot could move around for a high amount of time if it did not detect the recharing room immediately, but this behaviour would not affect neither the surveillance problem of the robot nor the physical constraints: the robot could not be teletransported from a room to another so need to have the physical possibility to reach that new location.
