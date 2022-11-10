@@ -113,6 +113,16 @@ The loop of _Reasoner_ - _Plan Path_ - _Go To Location_ is repeated in an infini
 
 The code is also composed of an _Helper_ which is a class containing all the shared variables and the mutex to allow the FSM states access them correctly.
 
+<img
+    src="images/component_diagram"
+    title="component diagram"
+    width="75%" height=75%>
+
+In teh figure above there is the presentation of how the components used in the software interact among them. In particular:
+* _armor server_: it is the server used to provide the computations related to the ontology. It communicates through queries that are sent from the Finite State Machine to the server and this in turn gives a result then analyzed in the FSM.
+* _planner_: it is responsible of computing the path and communicates through the _Plan Action_ sent. It returns a plan which is the result of the server.
+* controller: it is responsible of moving the robot along the path and communicates through the _Control Action_ sent. It updates the actual position of the robot through the via points thanks to the server result.
+
 ## Installation and Running Procedure
 ### Run by `roslaunch` file
 In order to run the program by the [`roslaunch`](launch/assignment.launch) file we first need to install the `xterm` tool by following these steps:
