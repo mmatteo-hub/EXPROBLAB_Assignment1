@@ -114,7 +114,7 @@ The loop of _Reasoner_ - _Plan Path_ - _Go To Location_ is repeated in an infini
 The code is also composed of an _Helper_ which is a class containing all the shared variables and the mutex to allow the FSM states access them correctly.
 
 <img
-    src="images/component_diagram"
+    src="images/component_diagram.jpg"
     title="component diagram"
     width="75%" height=75%>
 
