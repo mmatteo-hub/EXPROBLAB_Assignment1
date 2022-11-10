@@ -180,10 +180,10 @@ The ontology that we initialized in this assignment is the following:
     title="Ontology Map"
     width="50%" height="50%">
 
-The environment used and initialized is supposed to be consinstent with the real one, so that the reasoner can alsways find a consinstent ontology to work on. <br>
+The environment used and initialized is supposed to be consinstent with the real one, so that the reasoner can always find a consinstent ontology to work on. <br>
 Moreover, it is also assumed that all corridors, _E_, _C1_ and _C2_ are connected together. In this way the robot is able to perform its _surveillance policy_ correctly. <br>
 Also for more difficult environment, so for bigger ontologies it is assumed that all the corridors are connected together and at least with the _recharging location_. <br>
-It was also assumed that each location is associated to a spicific coordinate point composed of _x_ and _y_ value. These are the values that are used in the `planner` to compute the path. The values of the coordinates are taken from the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file. <br>
+It was also assumed that each location is associated to a spicific coordinate point composed of _x_ and _y_ value. These are the values that are used in the `planner` to compute the path. The values of the coordinates are taken from the [`name_mapper.py`](utilities/EXPROBLAB_Assignment1/name_mapper.py) file and are also shown in the figure above. Of course it is not taken into account the actual dimension of the environment, but they are just used to have a reference for the path computation. <br>
 <br>
 The _urgent_ parameter that allows the location to have the priority to be visited is set to 15 seconds. All the location that have not been visited for more than 15 seconds become urgent and have the priority. Of course, if the robot has not enough battery the priority is taken by the recharging room _E_ that is the one to be reached as soon as possible.
 
