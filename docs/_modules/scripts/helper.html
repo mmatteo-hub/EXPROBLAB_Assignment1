@@ -37,8 +37,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">utilities</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -101,7 +105,7 @@
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
 
-<div class="viewcode-block" id="Helper"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper">[docs]</a><span class="k">class</span> <span class="nc">Helper</span><span class="p">:</span>
+<div class="viewcode-block" id="Helper"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper">[docs]</a><span class="k">class</span> <span class="nc">Helper</span><span class="p">:</span>
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">done_callback</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">feedback_callback</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mutex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to inizialize the helper.</span>
@@ -131,7 +135,7 @@
 		<span class="c1"># client for the controller server</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">controller_client</span> <span class="o">=</span> <span class="n">actionlib</span><span class="o">.</span><span class="n">SimpleActionClient</span><span class="p">(</span><span class="s1">&#39;motion/controller&#39;</span><span class="p">,</span> <span class="n">ControlAction</span><span class="p">)</span>
 		
-<div class="viewcode-block" id="Helper.reason_changes"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper.reason_changes">[docs]</a>	<span class="k">def</span> <span class="nf">reason_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper.reason_changes"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper.reason_changes">[docs]</a>	<span class="k">def</span> <span class="nf">reason_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to apply the modifications to the ontology.</span>
 <span class="sd">		It uses the aRMOR client to do this and it is called every time the program changes something related to the ontology entities (timestamps, robot position etc ...)</span>
@@ -145,7 +149,7 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">apply_buffered_changes</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">sync_buffered_reasoner</span><span class="p">()</span></div>
 		
-<div class="viewcode-block" id="Helper.check_battery"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper.check_battery">[docs]</a>	<span class="k">def</span> <span class="nf">check_battery</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper.check_battery"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper.check_battery">[docs]</a>	<span class="k">def</span> <span class="nf">check_battery</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to check the threshold to rise the battery low process.</span>
 <span class="sd">		This function checks the difference between the actual time and the last time the battery has been recharged and if it has passed too much time it changes the value of the shared variable.</span>
@@ -162,7 +166,7 @@
 			<span class="bp">self</span><span class="o">.</span><span class="n">action_for_change</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">BATTERY_LOW</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
 		
-<div class="viewcode-block" id="Helper.format"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper.format">[docs]</a>	<span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oldlist</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper.format"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper.format">[docs]</a>	<span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oldlist</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to format a list of strings.</span>
 <span class="sd">		For all the elements in the list, it takes two character, a start and a finish one. In each element i-th it is looked for these two characters and it is taken just the portion of the string between them.</span>
@@ -181,7 +185,7 @@
 			<span class="n">newlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="s1">&#39;(.+?)&#39;</span> <span class="o">+</span> <span class="n">end</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 		<span class="k">return</span> <span class="n">newlist</span></div>
 
-<div class="viewcode-block" id="Helper.plan_location"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper.plan_location">[docs]</a>	<span class="k">def</span> <span class="nf">plan_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper.plan_location"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper.plan_location">[docs]</a>	<span class="k">def</span> <span class="nf">plan_location</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		It returns the client goal formatted as the start and target position.</span>
 <span class="sd">		It uses some private methods to compute the actual robot position and the target goal for the robot.</span>
@@ -197,7 +201,7 @@
 		<span class="n">goal</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_target_coordiantes</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
 		<span class="k">return</span> <span class="n">goal</span></div>
 
-<div class="viewcode-block" id="Helper._robot_pos"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper._robot_pos">[docs]</a>	<span class="k">def</span> <span class="nf">_robot_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper._robot_pos"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper._robot_pos">[docs]</a>	<span class="k">def</span> <span class="nf">_robot_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Private function that checks and returns the actual robot position thanks to a query to the aRMOR server.</span>
 <span class="sd">		The function returns a type Point with its x and y parameters.</span>
@@ -213,7 +217,7 @@
 			<span class="k">if</span> <span class="n">_pos</span> <span class="o">==</span> <span class="n">nm</span><span class="o">.</span><span class="n">ROOMS</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
 				<span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">COORDINATES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">COORDINATES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span></div>
 				
-<div class="viewcode-block" id="Helper._target_coordiantes"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper._target_coordiantes">[docs]</a>	<span class="k">def</span> <span class="nf">_target_coordiantes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_location</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper._target_coordiantes"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper._target_coordiantes">[docs]</a>	<span class="k">def</span> <span class="nf">_target_coordiantes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_location</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to retrieve the room coordinates (x and y) from its name.</span>
 <span class="sd">		The function works with the help of the :mod:`name_mapper` file that stores both the name and the corresponding coordinates for each location in the ontology.</span>
@@ -229,7 +233,7 @@
 			<span class="k">if</span> <span class="n">_location</span> <span class="o">==</span> <span class="n">nm</span><span class="o">.</span><span class="n">ROOMS</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
 				<span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">COORDINATES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">nm</span><span class="o">.</span><span class="n">COORDINATES</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="Helper._robot_timestamp_value"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper._robot_timestamp_value">[docs]</a>	<span class="k">def</span> <span class="nf">_robot_timestamp_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper._robot_timestamp_value"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper._robot_timestamp_value">[docs]</a>	<span class="k">def</span> <span class="nf">_robot_timestamp_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to retrieve the timestamp of the robot.</span>
 <span class="sd">		It is used the aRMOR server with a query and the timestamp is returned as output.</span>
@@ -243,7 +247,7 @@
 		<span class="n">_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">dataprop_b2_ind</span><span class="p">(</span><span class="s1">&#39;now&#39;</span><span class="p">,</span> <span class="s1">&#39;Robot1&#39;</span><span class="p">)</span>
 		<span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_timestamp</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
 				
-<div class="viewcode-block" id="Helper._location_old_timestamp"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper._location_old_timestamp">[docs]</a>	<span class="k">def</span> <span class="nf">_location_old_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_location</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper._location_old_timestamp"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper._location_old_timestamp">[docs]</a>	<span class="k">def</span> <span class="nf">_location_old_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_location</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to retrieve the timestamp of the lcoation.</span>
 <span class="sd">		It is used the aRMOR server with a query and the timestamp is returned as output.</span>
@@ -258,7 +262,7 @@
 		<span class="n">_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">dataprop_b2_ind</span><span class="p">(</span><span class="s1">&#39;visitedAt&#39;</span><span class="p">,</span> <span class="n">_location</span><span class="p">)</span>
 		<span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_timestamp</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="Helper.update_timestamp"><a class="viewcode-back" href="../../index.html#scripts.helper.Helper.update_timestamp">[docs]</a>	<span class="k">def</span> <span class="nf">update_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Helper.update_timestamp"><a class="viewcode-back" href="../../scripts.html#scripts.helper.Helper.update_timestamp">[docs]</a>	<span class="k">def</span> <span class="nf">update_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function to update the timestamp of an entity in the ontology.</span>
 <span class="sd">		It is replaced the timestamp of the robot with the acutal time.</span>

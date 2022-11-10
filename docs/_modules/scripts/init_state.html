@@ -37,8 +37,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities.html">utilities</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -98,7 +102,7 @@
 
 <span class="kn">from</span> <span class="nn">armor_api.armor_client</span> <span class="kn">import</span> <span class="n">ArmorClient</span>
 
-<div class="viewcode-block" id="InitState"><a class="viewcode-back" href="../../index.html#scripts.init_state.InitState">[docs]</a><span class="k">class</span> <span class="nc">InitState</span><span class="p">(</span><span class="n">smach</span><span class="o">.</span><span class="n">State</span><span class="p">):</span>
+<div class="viewcode-block" id="InitState"><a class="viewcode-back" href="../../scripts.html#scripts.init_state.InitState">[docs]</a><span class="k">class</span> <span class="nc">InitState</span><span class="p">(</span><span class="n">smach</span><span class="o">.</span><span class="n">State</span><span class="p">):</span>
 	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">helper</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function used to initialize the state of the machine.</span>
@@ -117,14 +121,14 @@
 								<span class="n">input_keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;init_state_counter_in&#39;</span><span class="p">],</span>
 								<span class="n">output_keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;init_state_counter_out&#39;</span><span class="p">])</span>
 								
-<div class="viewcode-block" id="InitState.execute"><a class="viewcode-back" href="../../index.html#scripts.init_state.InitState.execute">[docs]</a>	<span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userdata</span><span class="p">):</span>
+<div class="viewcode-block" id="InitState.execute"><a class="viewcode-back" href="../../scripts.html#scripts.init_state.InitState.execute">[docs]</a>	<span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userdata</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function that is executed every time the machine enters the state.</span>
 <span class="sd">		It is responsible of returning a state transitioning to change the state.</span>
 <span class="sd">		It uses the mutex instantiated in the helper to manage the variable access.</span>
 <span class="sd">		</span>
 <span class="sd">		Args:</span>
-<span class="sd">			userdata:</span>
+<span class="sd">			userdata: pointer to pass the data among the states of a State Machine</span>
 <span class="sd">			</span>
 <span class="sd">		Returns:</span>
 <span class="sd">			transition(String): string containing the label of the action performed and used to change state in the machine.</span>
@@ -145,7 +149,7 @@
 				<span class="bp">self</span><span class="o">.</span><span class="n">_helper</span><span class="o">.</span><span class="n">mutex</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 			<span class="n">rospy</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span></div>
 			
-<div class="viewcode-block" id="InitState._ontology_initialization"><a class="viewcode-back" href="../../index.html#scripts.init_state.InitState._ontology_initialization">[docs]</a>	<span class="k">def</span> <span class="nf">_ontology_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InitState._ontology_initialization"><a class="viewcode-back" href="../../scripts.html#scripts.init_state.InitState._ontology_initialization">[docs]</a>	<span class="k">def</span> <span class="nf">_ontology_initialization</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Function used to store all the request to the aRMOR server, through the client, to modifiy the onotlogy.</span>
 <span class="sd">		In particular it uses a pre-built ontology that is stored in the project folder and it modifies it by adding entities and properties.</span>

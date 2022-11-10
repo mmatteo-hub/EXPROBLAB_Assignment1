@@ -10,6 +10,9 @@ Welcome to EXPROBLAB_Assignment1's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   scripts
+   utilities
+
 Indices and tables
 ==================
 
@@ -20,49 +23,6 @@ Indices and tables
 EXPROBLAB_Assignment1
 *********************
 
-This is the documenation for the Experimental Robotics Laboratory Assignment #1
-
-Helper Module
-=============
-.. automodule:: scripts.helper
-	:members:
-
-InitState Module
-================
-.. automodule:: scripts.init_state
-	:members:
-
-FSM Module
-==========
-.. automodule:: scripts.fsm
-	:members:
-  
-Reasoner Module
-===============
-.. automodule:: scripts.reasoner
-	:members:
-
-Recharge Module
-===============
-.. automodule:: scripts.recharge
-	:members:
-  
-Plan Path To Location Module
-============================
-.. automodule:: scripts.plan_path_to_location
-	:members:
-
-Go To Location To Visit Module
-==============================
-.. automodule:: scripts.go_to_location_to_visit
-	:members:
-
-Planner Server Module
-=====================
-.. automodule:: scripts.planner
-	:members:
-
-Controller Server Module
-========================
-.. automodule:: scripts.controller
-	:members:
+This is the documenation for the Experimental Robotics Laboratory Assignment #1.
+Thanks to the index above you can see all the scripts provided in the package and you an analyze the public and private method of the classes.
+It is also provided a documentation for the `name_mapper.py` file used to define all the variables used in the package.
