@@ -36,7 +36,7 @@ This repository contains a ROS package named `EXPROBLAB_Assignment1` that includ
       controller.
  - [utilities/EXPROBLAB_Assignment1/](utilities/EXPROBLAB_Assignment1/): It contains auxiliary python files, 
    which are exploited by the files in the `scripts` folder.
-    - [name_mapper.py](scripts/name_mapper.py): It contains the name
+    - [name_mapper.py](utilities/EXPROBLAB_Assignment1//name_mapper.py): It contains the name
       of each *node*, *topic*, *server*, *actions* and *parameters* used in this architecture, if any.
  - [docs](docs/): It contains the _HTML_ documentation of the package.
  - [topology](/topology): It contains the starting ontology used in the package which is modified in the initial state to build the new environment for the assignment.
