@@ -78,8 +78,35 @@ The hand-drawn graph can be seen in the following image:
 
 Here all the transitions can be clearly read and it is highlighted also the sub finite state machine used with the two inner states in details.
 
+#### Temporal diagram
+Here there is the temporal diagram of the component interaction:
+
+<img
+    src="/images/sequence_diagram.jpg"
+    title="sequence diagram"
+    width="75%" heiht="75%">
+
+It was put all the component of the architecture and it was highlighted the _battery low_ case. This is a trivial case, which is always checked. It in fact make the system to return to the FSM immediately and to recharge the robot, according to the actual conditions the robot is into. <br>
+The other components are active always but they do something only when the FSM, so the main program, ask them to do. In this way the interaction is short and do no interfer with the normal flow of the program.
+
 ### <img src="https://user-images.githubusercontent.com/62358773/201228015-2f81ca3e-9471-4188-9e18-f683c94ef68d.png" width="4%" height="4%"> Software components
 It follows the details of the software components used in the program, which are available in the [`scripts`](scripts/) folder.
+
+#### The `FSM` Node
+<img
+    src="images/fsm_component.jpg"
+    title="FSM node"
+    width="75%" height="75%">
+
+The `FSM` node implements the behaviour of the machine. It is used to make the robot move with a certain behaviour inside the environment. It communicates mainly with the aRMRO server to which it sents query to ask for information about the robot actual positiopn, the possible locations that can be reach, the currently urgent locations for example. Then, from this server it receives the result of the query which are basically a serires of list of objects or some boolean returns. <br>
+The other components it communicates with are the `planner` and the `controller`. To these servers, it sends some requests and it receives a result that is later analyzed and used in the program. In particular:
+* with the `planner`:
+    * request: _Point_ type with a target and a goal position for the path to be computed;
+    * response: _Point []_ list with the via points the robot will have to follow;
+
+* with the `controller`:
+    * request: _Point []_ list with the via points the robot will have to follow;
+    * response: status of the server which explains when it has finished or not to simulate the movement of the robot through the via points.
 
 #### The `planner` Node
 <img
