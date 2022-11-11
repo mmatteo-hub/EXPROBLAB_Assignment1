@@ -152,8 +152,8 @@ In the figure above there is the presentation of how the components used in the 
 * _planner_: it is responsible of computing the path and communicates through the _Plan Action_ sent. It returns a plan which is the result of the server.
 * _controller_: it is responsible of moving the robot along the path and communicates through the _Control Action_ sent. It updates the actual position of the robot through the via points thanks to the server result.
 <br>
-<br>
-For the complete documentation of the aRMOR serve check its [github repository[(https://github.com/EmaroLab/armor).
+
+For the complete documentation of the aRMOR serve check its [github repository](https://github.com/EmaroLab/armor).
 
 ## <img src="https://user-images.githubusercontent.com/62358773/175919787-96dfd662-af73-4ab6-a6ad-e7049ff1336e.png" width="5%" height="5%"> Installation and Running Procedure
 ### Run by `roslaunch` file
