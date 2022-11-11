@@ -229,15 +229,15 @@ The robot starts in the _Recharging Room_ which is in this case the _E_ one. Fro
 The robot is also assumed to have an autonomy of 60 seconds, after which it needs to be recharged. It is assumed that the robot needs to reach the proper location before being recharged and also this reaching transition is performed randomly at the beginning when the robot cannot reach the recharging location; as soon as it has the possibility to reach it, then the choice is imposed to this one. <br>
 The robot has an autonomy battery of 60 seconds after which it has to be recharged before continuing with its normal behaviour.
 
-### System Features
+## <img src="https://user-images.githubusercontent.com/62358773/201371845-425ed89b-00c0-4e46-b7f5-b22daf8b50ff.png" width="5%" height="5%"> System Features 
 In order to build the system it was opted to build a robust code. In fact, when the robot has a low battery level its only goal is to reach the _E_ room: as it was more than an _urgent_ location. This means that the robot could move around for a high amount of time if it did not detect the recharing room immediately, but this behaviour would not affect neither the surveillance problem of the robot nor the physical constraints: the robot could not be teletransported from a room to another so need to have the physical possibility to reach that new location.
 
-### System Limitation
+## <img src="https://user-images.githubusercontent.com/62358773/201371842-845e90d3-886d-4ffb-abee-2a22d14615a4.png" width="5%" height="5%"> System Limitation
 One of the possible limitation of the code is the possibility of having the robot moving randomly for a long time before reaching the recharging room when needed which could be tricky from a physical point of view since the robot could not have all that amount of battery left. Howeverm this approach is preferred with respect to another one since it is robuster and respects the physics behind the robot movement.
 
-### Possible technical improvements
+## <img src="https://user-images.githubusercontent.com/62358773/201371847-1253200a-8f49-4706-bf07-1cad676276d5.png" width="5%" height="5%"> Possible technical improvements
 A possible improvement could be the possibility to make the robot remember a path from each location to the recharging room so that in case of low battery it can reach the location without having to choose randomly and thus reducing the time wasting due to the random choice. <br>
-Moreover, if the robot had to compute the path it would have to compute it by checking all the possible paths and take the most optimal one thus avoiding loosing time with not useful movements and not have to waste important battery.
+Moreover, if the robot had to compute the path it would have to compute it by checking all the possible paths and take the most optimal one thus avoiding loosing time with not useful movements and not have to waste important battery resource.
 
 ## <img src="https://user-images.githubusercontent.com/62358773/158238810-c5dcb486-ba24-4b35-87de-39a54e88f36b.png" width="5%" height="5%"> Authors and Contacts
 [Matteo Maragliano](https://github.com/mmatteo-hub) (S4636216) <br>
