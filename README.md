@@ -1,8 +1,10 @@
-# EXPROBLAB_Assignment1
+# EXPROBLAB_Assignment #1 <img src="https://user-images.githubusercontent.com/62358773/201387918-d02ebfbd-ca2f-4065-a534-c6b04a30409c.png" width="6%" height="6%">
+
+<img src="https://user-images.githubusercontent.com/62358773/201387582-4b8a49ac-06e6-42b0-be60-bd3e48cb53a9.png" width="4%" height="4%"> [Code Documentation](https://mmatteo-hub.github.io/EXPROBLAB_Assignment1/)
 
 ## <img src="https://user-images.githubusercontent.com/62358773/201054267-813527ff-db10-4746-98d2-b590956c9d9e.png" width="5%" height="5%"> Introduction
 The assignment is the realization of an algorithm to make the robot move in an environment and have a surveillance behaviour to choose the way to move. The invironment is composed of locations that are connected in a certain way depending on the choice of the user.
-The goal is to build a Finite State Machine (FSM) that allows the robot to choose the behaviour to adopt depending on the situation. The robot is also provided a battery, periodically checked, that needs to be recharged after some time of using. <br>
+The goal is to build a Finite State Machine (FSM), with the use of [SMACH](http://wiki.ros.org/smach), that allows the robot to choose the behaviour to adopt depending on the situation. The robot is also provided a battery, periodically checked, that needs to be recharged after some time of using. <br>
 The locations are divided into:
 * room: location with one door;
 * corridor: location with at least two door.
@@ -145,10 +147,13 @@ The code is also composed of an _Helper_ which is a class containing all the sha
     title="component diagram"
     width="75%" height=75%>
 
-In teh figure above there is the presentation of how the components used in the software interact among them. In particular:
+In the figure above there is the presentation of how the components used in the software interact among them. In particular:
 * _armor server_: it is the server used to provide the computations related to the ontology. It communicates through queries that are sent from the Finite State Machine to the server and this in turn gives a result then analyzed in the FSM.
 * _planner_: it is responsible of computing the path and communicates through the _Plan Action_ sent. It returns a plan which is the result of the server.
 * _controller_: it is responsible of moving the robot along the path and communicates through the _Control Action_ sent. It updates the actual position of the robot through the via points thanks to the server result.
+<br>
+<br>
+For the complete documentation of the aRMOR serve check its [github repository[(https://github.com/EmaroLab/armor).
 
 ## <img src="https://user-images.githubusercontent.com/62358773/175919787-96dfd662-af73-4ab6-a6ad-e7049ff1336e.png" width="5%" height="5%"> Installation and Running Procedure
 ### Run by `roslaunch` file
